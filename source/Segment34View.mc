@@ -37,6 +37,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var histogramBarSpacing as Number = 2;
     hidden var histogramHeight as Number = 20;
     hidden var histogramTargetWidth as Number = 40;
+    hidden var hideLine2 as Boolean = false;
 
     hidden var fontMoon as WatchUi.FontResource;
     hidden var fontIcons as WatchUi.FontResource;
@@ -172,13 +173,13 @@ class Segment34View extends WatchUi.WatchFace {
     (:Round454) const bottomFieldBg = "#";
     (:Round360) const bottomFieldBg = "$";
 
-    (:Round240) const bottomFieldWidths = [3, 3, 3, 0];
-    (:Round260) const bottomFieldWidths = [3, 4, 3, 0];
-    (:Round280) const bottomFieldWidths = [4, 3, 4, 0];
-    (:Round360) const bottomFieldWidths = [3, 4, 3, 0];
-    (:Round390) const bottomFieldWidths = [4, 3, 4, 0];
-    (:Round416) const bottomFieldWidths = [4, 4, 4, 0];
-    (:Round454) const bottomFieldWidths = [4, 4, 4, 0];
+    (:Round240) const bottomFieldWidths = [3, 3, 0, 0];
+    (:Round260) const bottomFieldWidths = [4, 4, 0, 0];
+    (:Round280) const bottomFieldWidths = [4, 3, 0, 0];
+    (:Round360) const bottomFieldWidths = [2, 3, 2, 0];
+    (:Round390) const bottomFieldWidths = [4, 3, 0, 0];
+    (:Round416) const bottomFieldWidths = [4, 4, 0, 0];
+    (:Round454) const bottomFieldWidths = [4, 4, 0, 0];
 
     (:Round240) const barWidth = 3;
     (:Round260) const barWidth = 3;
@@ -203,7 +204,7 @@ class Segment34View extends WatchUi.WatchFace {
         centerX = Math.round(screenWidth / 2);
         centerY = Math.round(screenHeight / 2);
         marginY = Math.round(screenHeight / 30);
-        marginX = Math.round(screenWidth / 20);
+        marginX = Math.round(screenWidth / 15);
         
         loadResources();
 
@@ -219,90 +220,96 @@ class Segment34View extends WatchUi.WatchFace {
     (:Round240)
     hidden function loadResources() as Void {
         fontClock = Application.loadResource(Rez.Fonts.segments80narrow);
-        fontTinyData = Application.loadResource(Rez.Fonts.smol);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_small); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_readable); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_lines); }
-        fontLargeData = Application.loadResource(Rez.Fonts.led);
-        fontBottomData = Application.loadResource(Rez.Fonts.led_small);
-        fontLabel = Application.loadResource(Rez.Fonts.xsmol);
-        fontBattery = fontTinyData;
-
-        clockHeight = 80;
-        clockWidth = 220;
-        labelHeight = 5;
-        labelMargin = 3;
-        tinyDataHeight = 8;
-        smallDataHeight = 13;
-        largeDataHeight = 20;
-
-        baseX = centerX;
-        baseY = centerY - smallDataHeight + 4;
-        fieldSpaceingAdj = 10;
-        barBottomAdj = 1;
-        histogramBarWidth = 1;
-        histogramBarSpacing = 1;
-        histogramHeight = 15;
-        histogramTargetWidth = 30;
-    }
-
-    (:Round260)
-    hidden function loadResources() as Void {
-        fontClock = Application.loadResource(Rez.Fonts.segments80);
-        fontTinyData = Application.loadResource(Rez.Fonts.smol);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_small); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_readable); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_lines); }
-        fontLargeData = Application.loadResource(Rez.Fonts.led);
-        fontBottomData = fontLargeData;
-        fontLabel = Application.loadResource(Rez.Fonts.xsmol);
-        fontBattery = fontTinyData;
-
-        clockHeight = 80;
-        clockWidth = 227;
-        labelHeight = 5;
-        labelMargin = 3;
-        tinyDataHeight = 8;
-        smallDataHeight = 13;
-        largeDataHeight = 20;
-
-        baseX = centerX + 1;
-        baseY = centerY - smallDataHeight - 1;
-        fieldSpaceingAdj = 15;
-        bottomFiveAdj = 2;
-        barBottomAdj = 1;
-        histogramBarWidth = 1;
-        histogramBarSpacing = 1;
-        histogramHeight = 18;
-    }
-
-    (:Round280)
-    hidden function loadResources() as Void {
-        fontClock = Application.loadResource(Rez.Fonts.segments80wide);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_small); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_lines); }
         fontLargeData = Application.loadResource(Rez.Fonts.led);
         fontBottomData = fontLargeData;
-        fontLabel = Application.loadResource(Rez.Fonts.smol);
-        fontBattery = fontLabel;
+        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontBattery = Application.loadResource(Rez.Fonts.smol);
 
         clockHeight = 80;
-        clockWidth = 236;
+        clockWidth = 220;
         labelHeight = 8;
-        labelMargin = 3;
-        tinyDataHeight = 10;
+        labelMargin = 5;
+        tinyDataHeight = 8;
         smallDataHeight = 13;
         largeDataHeight = 20;
 
         baseX = centerX;
-        baseY = centerY - smallDataHeight - 4;
+        baseY = centerY - 10;
+        fieldSpaceingAdj = 10;
+        barBottomAdj = 1;
+        histogramBarWidth = 1;
+        histogramBarSpacing = 1;
+        histogramHeight = 15;
+        histogramTargetWidth = 30;
+        hideLine2 = true;
+    }
+
+    (:Round260)
+    hidden function loadResources() as Void {
+        fontClock = Application.loadResource(Rez.Fonts.segments80);
+        fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
+        fontLargeData = Application.loadResource(Rez.Fonts.led);
+        fontBottomData = fontLargeData;
+        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontBattery = Application.loadResource(Rez.Fonts.smol);
+
+        clockHeight = 80;
+        clockWidth = 227;
+        labelHeight = 8;
+        labelMargin = 5;
+        tinyDataHeight = 8;
+        smallDataHeight = 20;
+        largeDataHeight = 20;
+
+        baseX = centerX + 1;
+        baseY = centerY - 10;
+        fieldSpaceingAdj = 15;
+        bottomFiveAdj = 2;
+        barBottomAdj = 1;
+        histogramBarWidth = 2;
+        histogramBarSpacing = 2;
+        histogramHeight = 25;
+        histogramTargetWidth = 30;
+        hideLine2 = true;
+    }
+
+    (:Round280)
+    hidden function loadResources() as Void {
+        fontClock = Application.loadResource(Rez.Fonts.segments80wide);
+        fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
+        fontLargeData = Application.loadResource(Rez.Fonts.led_big);
+        fontBottomData = Application.loadResource(Rez.Fonts.led);
+        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontAODData = fontBottomData;
+        fontBattery = Application.loadResource(Rez.Fonts.smol);
+
+        clockHeight = 80;
+        clockWidth = 236;
+        labelHeight = 8;
+        labelMargin = 5;
+        tinyDataHeight = 10;
+        smallDataHeight = 20;
+        largeDataHeight = 27;
+
+        marginY = 8;
+        baseX = centerX;
+        baseY = centerY - 10;
         bottomFiveAdj = 5;
         barBottomAdj = 1;
         histogramBarWidth = 1;
         histogramBarSpacing = 1;
         histogramHeight = 20;
+        iconYAdj = 0;
     }
 
     (:Round360)
@@ -310,9 +317,9 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125narrow);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125narrowoutline);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         fontLargeData = Application.loadResource(Rez.Fonts.led_big);
         fontBottomData = Application.loadResource(Rez.Fonts.led);
         fontLabel = Application.loadResource(Rez.Fonts.smol);
@@ -331,7 +338,7 @@ class Segment34View extends WatchUi.WatchFace {
         labelHeight = 8;
         labelMargin = 5;
         tinyDataHeight = 10;
-        smallDataHeight = 20;
+        smallDataHeight = 25;
         largeDataHeight = 27;
 
         baseX = centerX;
@@ -350,12 +357,12 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
-        fontLargeData = Application.loadResource(Rez.Fonts.led_big);
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
+        fontLargeData = Application.loadResource(Rez.Fonts.led_bigger);
         fontBottomData = fontLargeData;
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
         fontAODData = Application.loadResource(Rez.Fonts.led);
         fontBattery = fontTinyData;
 
@@ -368,18 +375,19 @@ class Segment34View extends WatchUi.WatchFace {
 
         clockHeight = 125;
         clockWidth = 355;
-        labelHeight = 10;
+        labelHeight = 13;
         labelMargin = 5;
         tinyDataHeight = 13;
-        smallDataHeight = 20;
-        largeDataHeight = 27;
+        smallDataHeight = 25;
+        largeDataHeight = 40;
 
         baseX = centerX;
-        baseY = centerY - smallDataHeight - 3;
+        baseY = centerY - 15;
         barBottomAdj = 2;
         bottomFiveAdj = 6;
-        marginY = 10;
-        histogramHeight = 25;
+        fieldSpaceingAdj = 20;
+        histogramHeight = 20;
+        histogramTargetWidth = 30;
     }
 
     (:Round416)
@@ -387,12 +395,12 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
-        fontLargeData = Application.loadResource(Rez.Fonts.led_big);
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
+        fontLargeData = Application.loadResource(Rez.Fonts.led_bigger);
         fontBottomData = fontLargeData;
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
         fontAODData = Application.loadResource(Rez.Fonts.led);
         fontBattery = fontTinyData;
 
@@ -405,14 +413,15 @@ class Segment34View extends WatchUi.WatchFace {
 
         clockHeight = 125;
         clockWidth = 360;
-        labelHeight = 10;
+        labelHeight = 13;
         labelMargin = 5;
         tinyDataHeight = 13;
-        smallDataHeight = 20;
-        largeDataHeight = 27;
+        smallDataHeight = 27;
+        largeDataHeight = 40;
 
         baseX = centerX;
-        baseY = centerY - smallDataHeight - 5;
+        baseY = centerY - 15;
+        fieldSpaceingAdj = 25;
         barBottomAdj = 2;
         bottomFiveAdj = 8;
         histogramHeight = 25;
@@ -423,13 +432,13 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments145);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments145outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
-        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
-        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
-        fontLargeData = Application.loadResource(Rez.Fonts.led_big);
+        if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
+        if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
+        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
+        fontLargeData = Application.loadResource(Rez.Fonts.led_bigger);
         fontBottomData = fontLargeData;
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
-        fontAODData = Application.loadResource(Rez.Fonts.led);
+        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
@@ -441,21 +450,21 @@ class Segment34View extends WatchUi.WatchFace {
 
         clockHeight = 145;
         clockWidth = 413;
-        labelHeight = 10;
+        labelHeight = 13;
         labelMargin = 5;
         tinyDataHeight = 13;
-        smallDataHeight = 20;
-        largeDataHeight = 27;
+        smallDataHeight = 27;
+        largeDataHeight = 40;
 
         baseX = centerX + 3;
-        baseY = centerY - smallDataHeight + 4;
+        baseY = centerY - 10;
         fieldSpaceingAdj = 20;
         textSideAdj = 4;
         bottomFiveAdj = 4;
         barBottomAdj = 2;
-        marginY = 17;
-        histogramHeight = 30;
-        histogramTargetWidth = 45;
+        marginY = 16;
+        histogramHeight = 40;
+        histogramTargetWidth = 50;
     }
 
     // Load your resources here
@@ -553,6 +562,7 @@ class Segment34View extends WatchUi.WatchFace {
         dc.clear();
         var yn1 = baseY - halfClockHeight - marginY - smallDataHeight;
         var yn2 = yn1 - marginY - smallDataHeight;
+        if(hideLine2) { yn2 = yn1 - marginY; }
         var yn3 = yn2 - marginY - histogramHeight;
 
         // Draw Top data fields or histogram
@@ -565,30 +575,32 @@ class Segment34View extends WatchUi.WatchFace {
             if(propTopPartShows == 1) { top_field_center_offset = labelHeight; }
             if(propLabelVisibility == 0 or propLabelVisibility == 3) {
                 dc.setColor(themeColors[fieldLbl], Graphics.COLOR_TRANSPARENT);
-                dc.drawText(centerX - top_field_center_offset, marginY, fontLabel, dataLabelTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
-                dc.drawText(centerX + top_field_center_offset, marginY, fontLabel, dataLabelTopRight, Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(centerX - top_field_center_offset, yn3, fontLabel, dataLabelTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
+                dc.drawText(centerX + top_field_center_offset, yn3, fontLabel, dataLabelTopRight, Graphics.TEXT_JUSTIFY_LEFT);
 
                 top_data_height = labelHeight + halfMarginY;
             }
 
             dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
             if(propTopPartShows == 0) {
-                dc.drawText(centerX - top_field_center_offset, marginY + top_data_height, top_field_font, dataTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
-                dc.drawText(centerX + top_field_center_offset, marginY + top_data_height, top_field_font, dataTopRight, Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(centerX - top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
+                dc.drawText(centerX + top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopRight, Graphics.TEXT_JUSTIFY_LEFT);
 
                 // Draw Moon
                 dc.setColor(themeColors[moon], Graphics.COLOR_TRANSPARENT);
-                dc.drawText(centerX, marginY + ((top_data_height + tinyDataHeight) / 2), fontMoon, dataMoon, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                dc.drawText(centerX, yn3 + ((top_data_height + tinyDataHeight) / 2), fontMoon, dataMoon, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             } else {
                 if(top_data_height == 0) { top_field_font = fontSmallData; }
-                dc.drawText(centerX - top_field_center_offset, marginY + top_data_height, top_field_font, dataTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
-                dc.drawText(centerX + top_field_center_offset, marginY + top_data_height, top_field_font, dataTopRight, Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(centerX - top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
+                dc.drawText(centerX + top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopRight, Graphics.TEXT_JUSTIFY_LEFT);
             }
         }
 
         // Draw Lines above clock
         dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
-        dc.drawText(centerX, yn2, fontSmallData, dataAboveLine1, Graphics.TEXT_JUSTIFY_CENTER);
+        if(!hideLine2) {
+            dc.drawText(centerX, yn2, fontSmallData, dataAboveLine1, Graphics.TEXT_JUSTIFY_CENTER);
+        }
         dc.drawText(centerX, yn1, fontSmallData, dataAboveLine2, Graphics.TEXT_JUSTIFY_CENTER);        
 
         // Draw Clock
@@ -667,28 +679,22 @@ class Segment34View extends WatchUi.WatchFace {
         drawDataField(dc, left_edge + Math.round(dw1 + dw2 + (dw3 / 2)), y2, 3, dataLabelBottomRight, dataBottomRight, "#", digits[2], fontLargeData);
         drawDataField(dc, left_edge + Math.round(dw1 + dw2 + dw3 + (dw4 / 2)), y2, 3, dataLabelBottomFourth, dataBottomFourth, "#", digits[3], fontLargeData);
 
+        
         // Draw the 5 digit bottom field
-        var y4 = y3 + halfMarginY + bottomFiveAdj;
-        if((propLabelVisibility == 1 or propLabelVisibility == 3)) { y4 = y4 - labelHeight; }
-        var step_width = 0;
-        if(screenHeight == 240) {
-            step_width = drawDataField(dc, centerX - 19, y4 + 3, 0, null, dataBottom, bottomFieldBg, 5, fontBottomData);
-        } else {
-            step_width = drawDataField(dc, centerX, y4, 0, null, dataBottom, bottomFieldBg, 5, fontBottomData);
+        var y4 = y3 + marginY;
+        var batt_width = 50;
+        if(screenWidth <= 280) {
+            batt_width = 25;
         }
 
         // Draw icons
         dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
-        if(screenHeight == 240) { step_width += 30; }
-        dc.drawText(centerX - (step_width / 2) - (marginX / 2), y4 + (largeDataHeight / 2) + iconYAdj, fontIcons, dataIcon1, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(centerX + (step_width / 2) + (marginX / 2) - 2, y4 + (largeDataHeight / 2) + iconYAdj, fontIcons, dataIcon2, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+        if(screenHeight == 240) { batt_width += 30; }
+        dc.drawText(centerX - (batt_width / 2) - (marginX / 2), y4 + 10 + iconYAdj, fontIcons, dataIcon1, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(centerX + (batt_width / 2) + (marginX / 2) - 2, y4 + 10 + iconYAdj, fontIcons, dataIcon2, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         
         // Draw battery icon
-        if(screenHeight == 240) {
-            drawBatteryIcon(dc, centerX + 32, y4);
-        } else {
-            drawBatteryIcon(dc, null, null);
-        }
+        drawBatteryIcon(dc, null, y4);
     }
 
     hidden function drawAOD(dc as Dc, now as Gregorian.Info) as Void {
@@ -1970,65 +1976,64 @@ class Segment34View extends WatchUi.WatchFace {
         
         // Handle all other cases with standard patterns
         switch(complicationType) {
-            case 0: return formatLabel("W MIN", "WEEK MIN", "WEEK ACT MIN", labelSize);
-            case 1: return formatLabel("D MIN", "MIN TODAY", "DAY ACT MIN", labelSize);
-            case 2: return formatLabel("D KM", "KM TODAY", "KM TODAY", labelSize);
-            case 3: return formatLabel("D MI", "MI TODAY", "MILES TODAY", labelSize);
+            case 0: return formatLabel("W MIN", "WEEK MIN", labelSize);
+            case 1: return formatLabel("D MIN", "MIN TODAY", labelSize);
+            case 2: return formatLabel("D KM", "KM TODAY", labelSize);
+            case 3: return formatLabel("D MI", "MI TODAY", labelSize);
             case 4: return "FLOORS:";
-            case 5: return formatLabel("CLIMB", "M CLIMBED", "M CLIMBED", labelSize);
-            case 6: return formatLabel("RECOV", "RECOV HRS", "RECOVERY HRS", labelSize);
-            case 7: return formatLabel("V02", "V02 MAX", "RUN V02 MAX", labelSize);  
-            case 8: return formatLabel("V02", "V02 MAX", "BIKE V02 MAX", labelSize);
-            case 9: return formatLabel("RESP", "RESP RATE", "RESP. RATE", labelSize);
-            case 11: return formatLabel("CAL", "CALORIES", "DLY CALORIES", labelSize);
-            case 12: return formatLabel("ALT", "ALTITUDE", "ALTITUDE M", labelSize);
+            case 5: return formatLabel("CLIMB", "M CLIMBED", labelSize);
+            case 6: return formatLabel("RECOV", "RECOV HRS", labelSize);
+            case 7: return formatLabel("V02", "V02 MAX", labelSize);  
+            case 8: return formatLabel("V02", "V02 MAX", labelSize);
+            case 9: return formatLabel("RESP", "RESP RATE", labelSize);
+            case 11: return formatLabel("CAL", "CALORIES", labelSize);
+            case 12: return formatLabel("ALT", "ALTITUDE", labelSize);
             case 13: return "STRESS:";
-            case 15: return formatLabel("ALT", "ALTITUDE", "ALTITUDE FT", labelSize);
+            case 15: return formatLabel("ALT", "ALTITUDE", labelSize);
             case 16: return Lang.format("$1$:", [propTzName1.toUpper()]);
-            case 14: return formatLabel("B BAT", "BODY BATT", "BODY BATTERY", labelSize);
+            case 14: return formatLabel("B BAT", "BODY BATT", labelSize);
             case 17: return "STEPS:";
-            case 18: return formatLabel("DIST", "M TODAY", "METERS TODAY", labelSize);
+            case 18: return formatLabel("DIST", "M TODAY", labelSize);
             case 19: return "PUSHES:";
             case 20: return "";
-            case 21: return formatLabel("W KM", "W RUN KM" , "WEEK RUN KM", labelSize);
-            case 22: return formatLabel("W MI", "W RUN MI" , "WEEK RUN MI", labelSize);
-            case 23: return formatLabel("W KM", "W BIKE KM" , "WEEK BIKE KM", labelSize);
-            case 24: return formatLabel("W MI", "W BIKE MI" , "WEEK BIKE MI", labelSize);
+            case 21: return formatLabel("W KM", "W RUN KM" , labelSize);
+            case 22: return formatLabel("W MI", "W RUN MI" , labelSize);
+            case 23: return formatLabel("W KM", "W BIKE KM" , labelSize);
+            case 24: return formatLabel("W MI", "W BIKE MI" , labelSize);
             case 25: return "TRAINING:";
             case 26: return "PRESSURE:";
-            case 27: return formatLabel("KG", "WEIGHT", "WEIGHT KG", labelSize);
-            case 28: return formatLabel("LBS", "WEIGHT", "WEIGHT LBS", labelSize);
-            case 29: return formatLabel("A CAL", "ACT. CAL", "ACT. CALORIES", labelSize);
+            case 27: return formatLabel("KG", "WEIGHT", labelSize);
+            case 28: return formatLabel("LBS", "WEIGHT", labelSize);
+            case 29: return formatLabel("A CAL", "ACT. CAL", labelSize);
             case 30: return "PRESSURE:";
             case 31: return "WEEK:";
-            case 32: return formatLabel("W KM", "WEEK KM", "WEEK DIST KM", labelSize);
-            case 33: return formatLabel("W MI", "WEEK MI", "WEEKLY MILES", labelSize);
-            case 34: return formatLabel("BATT", "BATT %", "BATTERY %", labelSize);
-            case 35: return formatLabel("BATT D", "BATT DAYS", "BATTERY DAYS", labelSize);
-            case 36: return formatLabel("NOTIFS", "NOTIFS", "NOTIFICATIONS", labelSize);
-            case 37: return formatLabel("SUN", "SUN INT", "SUN INTENSITY", labelSize);
-            case 38: return formatLabel("TEMP", "TEMP", "SENSOR TEMP", labelSize);
-            case 39: return formatLabel("DAWN", "SUNRISE", "SUNRISE", labelSize);
-            case 40: return formatLabel("DUSK", "SUNSET", "SUNSET", labelSize);
+            case 32: return formatLabel("W KM", "WEEK KM", labelSize);
+            case 33: return formatLabel("W MI", "WEEK MI", labelSize);
+            case 34: return formatLabel("BATT", "BATT %", labelSize);
+            case 35: return formatLabel("BATT D", "BATT DAYS", labelSize);
+            case 36: return formatLabel("NOTIFS", "NOTIFS", labelSize);
+            case 37: return formatLabel("SUN", "SUN INT", labelSize);
+            case 38: return formatLabel("TEMP", "TEMP", labelSize);
+            case 39: return formatLabel("DAWN", "SUNRISE", labelSize);
+            case 40: return formatLabel("DUSK", "SUNSET", labelSize);
             case 41: return Lang.format("$1$:", [propTzName2.toUpper()]);
-            case 42: return formatLabel("ALARM", "ALARMS", "ALARMS", labelSize);
-            case 43: return formatLabel("HIGH", "DAILY HIGH", "DAILY HIGH", labelSize);
-            case 44: return formatLabel("LOW", "DAILY LOW", "DAILY LOW", labelSize);
-            case 53: return formatLabel("TEMP", "TEMP", "TEMPERATURE", labelSize);
-            case 54: return formatLabel("PRECIP", "PRECIP", "PRECIPITATION", labelSize);
-            case 55: return formatLabel("SUN", "NEXT SUN", "NEXT SUN EVNT", labelSize);
-            case 57: return formatLabel("CAL", "NEXT CAL", "NEXT CAL EVNT", labelSize);
-            case 59: return formatLabel("OX", "PULSE OX", "PULSE OX", labelSize);
-            case 62: return formatLabel("ACC", "POS ACC", "POS ACCURACY", labelSize);
+            case 42: return formatLabel("ALARM", "ALARMS", labelSize);
+            case 43: return formatLabel("HIGH", "DAILY HIGH", labelSize);
+            case 44: return formatLabel("LOW", "DAILY LOW", labelSize);
+            case 53: return formatLabel("TEMP", "TEMP", labelSize);
+            case 54: return formatLabel("PRECIP", "PRECIP", labelSize);
+            case 55: return formatLabel("SUN", "NEXT SUN", labelSize);
+            case 57: return formatLabel("CAL", "NEXT CAL", labelSize);
+            case 59: return formatLabel("OX", "PULSE OX", labelSize);
+            case 62: return formatLabel("ACC", "POS ACC", labelSize);
         }
         
         return "";
     }
 
-    hidden function formatLabel(short as String, mid as String, long as String, size as Number) as String {
+    hidden function formatLabel(short as String, mid as String, size as Number) as String {
         if(size == 1) { return short + ":"; }
-        if(size == 2) { return mid + ":"; }
-        return long + ":";
+        return mid + ":";
     }
 
     hidden function formatDate() as String {
@@ -2037,12 +2042,11 @@ class Segment34View extends WatchUi.WatchFace {
         var value = "";
 
         switch(propDateFormat) {
-            case 0: // Default: THU, 14 MAR 2024
-                value = Lang.format("$1$, $2$ $3$ $4$", [
-                    dayName(today.day_of_week),
+            case 0: // Default: THU 14 MAR
+                value = Lang.format("$1$ $2$ $3$", [
+                    dayName(today.day_of_week, 3),
                     today.day,
-                    monthName(today.month),
-                    today.year
+                    monthName(today.month)
                 ]);
                 break;
             case 1: // ISO: 2024-03-14
@@ -2066,52 +2070,49 @@ class Segment34View extends WatchUi.WatchFace {
                     today.year
                 ]);
                 break;
-            case 4: // THU, 14 MAR (Week number)
-                value = Lang.format("$1$, $2$ $3$ (W$4$)", [
-                    dayName(today.day_of_week),
+            case 4: // 14 MAR (Week number)
+                value = Lang.format("$1$ $2$ (W$3$)", [
                     today.day,
                     monthName(today.month),
                     isoWeekNumber(today.year, today.month, today.day)
                 ]);
                 break;
-            case 5: // THU, 14 MAR 2024 (Week number)
-                value = Lang.format("$1$, $2$ $3$ $4$ (W$5$)", [
-                    dayName(today.day_of_week),
+            case 5: // THU 14 MAR YY
+                value = Lang.format("$1$ $2$ $3$ $4$", [
+                    dayName(today.day_of_week, 2),
                     today.day,
                     monthName(today.month),
-                    today.year,
-                    isoWeekNumber(today.year, today.month, today.day)
+                    today.year.format("%d").substring(2, 4)
                 ]);
                 break;
-            case 6: // WEEKDAY, DD MONTH
-                value = Lang.format("$1$, $2$ $3$", [
-                    dayName(today.day_of_week),
+            case 6: // DD MONTH
+                value = Lang.format("$1$ $2$", [
                     today.day,
                     monthName(today.month)
                 ]);
                 break;
-            case 7: // WEEKDAY, YYYY-MM-DD
-                value = Lang.format("$1$, $2$-$3$-$4$", [
-                    dayName(today.day_of_week),
-                    today.year,
+            case 7: // WEEKDAY YY-MM-DD
+                value = Lang.format("$1$ $2$-$3$-$4$", [
+                    dayName(today.day_of_week, 2),
+                    today.year.format("%d").substring(2, 4),
                     today.month.format("%02d"),
                     today.day.format("%02d")
                 ]);
                 break;
-            case 8: // WEEKDAY, MM/DD/YYYY
-                value = Lang.format("$1$, $2$/$3$/$4$", [
-                    dayName(today.day_of_week),
+            case 8: // WEEKDAY MM/DD/YY
+                value = Lang.format("$1$ $2$/$3$/$4$", [
+                    dayName(today.day_of_week, 2),
                     today.month.format("%02d"),
                     today.day.format("%02d"),
-                    today.year
+                    today.year.format("%d").substring(2, 4)
                 ]);
                 break;
-            case 9: // WEEKDAY, DD.MM.YYYY
-                value = Lang.format("$1$, $2$.$3$.$4$", [
-                    dayName(today.day_of_week),
+            case 9: // WEEKDAY DD.MM.YY
+                value = Lang.format("$1$ $2$.$3$.$4$", [
+                    dayName(today.day_of_week, 2),
                     today.day.format("%02d"),
                     today.month.format("%02d"),
-                    today.year
+                    today.year.format("%d").substring(2, 4)
                 ]);
                 break;
         }
@@ -2246,9 +2247,9 @@ class Segment34View extends WatchUi.WatchFace {
             "FOG",
             "HAZY",
             "HAIL",
-            "SCATTERED SHOWERS",
-            "SCATTERED THUNDERSTORMS",
-            "UNKNOWN PRECIPITATION",
+            "SCT SHOWERS",
+            "SCT THUNDERST",
+            "UNKN PRECIPIT",
             "LIGHT RAIN",
             "HEAVY RAIN",
             "LIGHT SNOW",
@@ -2262,8 +2263,8 @@ class Segment34View extends WatchUi.WatchFace {
             "LIGHT SHOWERS",
             "SHOWERS",
             "HEAVY SHOWERS",
-            "CHANCE OF SHOWERS",
-            "CHANCE OF THUNDERSTORMS",
+            "(SHOWERS)",
+            "(THUNDERSTORMS)",
             "MIST",
             "DUST",
             "DRIZZLE",
@@ -2278,11 +2279,11 @@ class Segment34View extends WatchUi.WatchFace {
             "FAIR",
             "HURRICANE",
             "TROPICAL STORM",
-            "CHANCE OF SNOW",
-            "CHANCE OF RAIN SNOW",
-            "CLOUDY CHANCE OF RAIN",
-            "CLOUDY CHANCE OF SNOW",
-            "CLOUDY CHANCE OF RAIN SNOW",
+            "(SNOW)",
+            "(RAIN SNOW)",
+            "CLOUDY (RAIN)",
+            "CLOUDY (SNOW)",
+            "CLDY (RAIN SNOW)",
             "FLURRIES",
             "FREEZING RAIN",
             "SLEET",
@@ -2534,15 +2535,27 @@ class Segment34View extends WatchUi.WatchFace {
         return val;
     }
 
-    hidden function dayName(day_of_week as Number) as String {
+    hidden function dayName(day_of_week as Number, width as Number) as String {
+        if(width == 3) {
+            var names = [
+                "SUN",
+                "MON",
+                "TUE",
+                "WED",
+                "THU",
+                "FRI",
+                "SAT",
+            ];
+            return names[day_of_week - 1];
+        }
         var names = [
-            "SUN",
-            "MON",
-            "TUE",
-            "WED",
-            "THU",
-            "FRI",
-            "SAT",
+            "SU",
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR",
+            "SA",
         ];
         return names[day_of_week - 1];
     }

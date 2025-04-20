@@ -18,6 +18,7 @@
     <font id="led_big" filename="led_big.fnt" antialias="false"/>
     <font id="led_big_readable" filename="led_big_readable.fnt" antialias="false"/>
     <font id="led_big_lines" filename="led_big_lines.fnt" antialias="false"/>
+    <font id="led_bigger" filename="led_bigger.fnt" antialias="false"/>
     <font id="smol" filename="smol.fnt" antialias="false" />
     <font id="xsmol" filename="xsmol.fnt" antialias="false" />
     <font id="moon" filename="moon.fnt" antialias="true" />

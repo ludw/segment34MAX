@@ -116,6 +116,19 @@
             </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.histogramData" title="Histogram shows (must be enabled in Top Part shows)">
+            <settingConfig type="list">
+                <listEntry value="0">Body battery history</listEntry>
+                <listEntry value="1">Elevation history</listEntry>
+                <listEntry value="2">Heart rate history</listEntry>
+                <listEntry value="3">Oxygen saturation history</listEntry>
+                <listEntry value="4">Pressure history</listEntry>
+                <listEntry value="5">Stress history</listEntry>
+                <listEntry value="7">Stress/rest (orange/blue)</listEntry>
+                <listEntry value="6">Temperature sensor history</listEntry>
+            </settingConfig>
+    </setting>
+
     <setting propertyKey="@Properties.sunriseFieldShows" title="Top left small data field:">
         <settingConfig type="list">
             <listEntry value="-2">Hidden</listEntry>
@@ -216,19 +229,6 @@
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.histogramData" title="Histogram shows (must be enabled in Top Part shows)">
-            <settingConfig type="list">
-                <listEntry value="0">Body battery history</listEntry>
-                <listEntry value="1">Elevation history</listEntry>
-                <listEntry value="2">Heart rate history</listEntry>
-                <listEntry value="3">Oxygen saturation history</listEntry>
-                <listEntry value="4">Pressure history</listEntry>
-                <listEntry value="5">Stress history</listEntry>
-                <listEntry value="7">Stress/rest (orange/blue)</listEntry>
-                <listEntry value="6">Temperature sensor history</listEntry>
-            </settingConfig>
     </setting>
 
     <setting propertyKey="@Properties.smallFontVariant" title="Small dot matrix font variant:">
@@ -872,16 +872,18 @@
     </setting>
     <setting propertyKey="@Properties.dateFormat" title="Date format">
         <settingConfig type="list">
-            <listEntry value="0">WEEKDAY, DD MONTH YYYY</listEntry>
-            <listEntry value="6">WEEKDAY, DD MONTH</listEntry>
+            <listEntry value="0">WEEKDAY DD MONTH</listEntry>
+            <listEntry value="6">DD MONTH</listEntry>
             <listEntry value="1">YYYY-MM-DD</listEntry>
             <listEntry value="2">MM/DD/YYYY</listEntry>
             <listEntry value="3">DD.MM.YYYY</listEntry>
-            <listEntry value="7">WEEKDAY, YYYY-MM-DD</listEntry>
-            <listEntry value="8">WEEKDAY, MM/DD/YYYY</listEntry>
-            <listEntry value="9">WEEKDAY, DD.MM.YYYY</listEntry>
-            <listEntry value="4">WEEKDAY, DD MONTH (Week)</listEntry>
-            <listEntry value="5">WEEKDAY, DD MONTH YYYY (Week)</listEntry>
+            <listEntry value="4">DD MONTH (Week)</listEntry>
+            <listEntry value="5">WD DD MONTH YY</listEntry>
+            <listEntry value="7">WD YY-MM-DD</listEntry>
+            <listEntry value="8">WD MM/DD/YY</listEntry>
+            <listEntry value="9">WD DD.MM.YY</listEntry>
+            
+            
         </settingConfig>
     </setting>
 
