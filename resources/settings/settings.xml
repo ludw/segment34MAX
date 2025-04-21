@@ -239,7 +239,7 @@
             </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.weatherLine1Shows" title="Line 1 above clock:">
+    <setting propertyKey="@Properties.weatherLine1Shows" title="Line 1 above clock (not on all watches):">
         <settingConfig type="list">
             <listEntry value="-2">Hidden</listEntry>
             <listEntry value="-1">Date</listEntry>
@@ -272,7 +272,7 @@
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.weatherLine2Shows" title="Line 2 above clock (not on all watches):">
+    <setting propertyKey="@Properties.weatherLine2Shows" title="Line 2 above clock:">
         <settingConfig type="list">
             <listEntry value="-2">Hidden</listEntry>
             <listEntry value="-1">Date</listEntry>

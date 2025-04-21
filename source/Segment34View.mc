@@ -271,7 +271,7 @@ class Segment34View extends WatchUi.WatchFace {
 
         baseX = centerX + 1;
         baseY = centerY - 10;
-        fieldSpaceingAdj = 15;
+        fieldSpaceingAdj = 10;
         barBottomAdj = 1;
         histogramBarWidth = 2;
         histogramBarSpacing = 2;
@@ -447,11 +447,11 @@ class Segment34View extends WatchUi.WatchFace {
         largeDataHeight = 40;
 
         baseX = centerX + 3;
-        baseY = centerY - 5;
+        baseY = centerY - 10;
         fieldSpaceingAdj = 20;
         textSideAdj = 4;
         barBottomAdj = 2;
-        marginY = 14;
+        marginY = 13;
         histogramHeight = 35;
         histogramTargetWidth = 45;
     }
@@ -715,7 +715,7 @@ class Segment34View extends WatchUi.WatchFace {
         } else {
             dc.drawText(baseX, y1, fontAODData, dataAODLeft, Graphics.TEXT_JUSTIFY_CENTER);
         }
-        dc.drawText(baseX + halfClockWidth - textSideAdj - 2, y1, fontAODData, dataAODRight, Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(baseX + halfClockWidth - textSideAdj - 1, y1, fontAODData, dataAODRight, Graphics.TEXT_JUSTIFY_RIGHT);
 
         // Draw text overlay
         dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), y1, drawAODPattern);
@@ -893,31 +893,31 @@ class Segment34View extends WatchUi.WatchFace {
         if(theme == 32) { return customColorTheme3(); }
         if(theme == 33) { return customColorTheme4(); }
 
-        //                       fieldBg,   fieldLbl, clockBg,  clock,    outline,    date,     dateDim,  notif,    stress,   bodybatt, bg,       dataVal,  moon
-        if(theme == 0 ) { return [0x0e333c, 0x55AAAA, 0x0d333c, 0xfbcb77, 0xffeac4, 0xfbcb77, 0xa98753, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Yellow on turquoise AMOLED
-        if(theme == 1 ) { return [0x0e333c, 0xAA55AA, 0x0f3b46, 0xffa5f9, 0xffd9fc, 0xFFFFFF, 0x984a8a, 0xFF55AA, 0xFF55AA, 0x00FFAA, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Hot pink AMOLED
-        if(theme == 2 ) { return [0x0f2246, 0x55AAAA, 0x0f2246, 0x89efd2, 0xb8efdf, 0x89efd2, 0x5ca28f, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Blueish green AMOLED
-        if(theme == 3 ) { return [0x152b19, 0x00AA55, 0x152b19, 0x96e0ac, 0xc3e0cc, 0x96e0ac, 0x5ca28f, 0x00AAFF, 0xffc884, 0x59b9fe, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Very green AMOLED
-        if(theme == 4 ) { return [0x0e333c, 0x55AAAA, 0x0d333c, 0xFFFFFF, 0xadeffe, 0xFFFFFF, 0x1d7e99, 0xAAAAAA, 0xFFAA55, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on turquoise AMOLED
-        if(theme == 5 ) { return [0x1b263d, 0xFFAAAA, 0x1b263d, 0xff9161, 0xffb494, 0xffb383, 0xaa6e56, 0xFFFFFF, 0xFF5555, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Peachy Orange AMOLED
-        if(theme == 6 ) { return [0x550000, 0xFF0000, 0x550000, 0xffffff, 0xc00003, 0xffffff, 0xAA0000, 0xFF0000, 0xAA0000, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Red and White AMOLED
-        if(theme == 7 ) { return [0x152a53, 0x0055AA, 0x152a53, 0xffffff, 0xaecaff, 0xffffff, 0x0055AA, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on Blue AMOLED
-        if(theme == 8 ) { return [0x152a53, 0x0055AA, 0x152a53, 0xfbcb77, 0xfbdda8, 0xffeac4, 0xa98753, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Yellow on Blue AMOLED
-        if(theme == 9 ) { return [0x58250b, 0xFF5500, 0x7d3f01, 0xffffff, 0xffd6ae, 0xffffff, 0xAA5500, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White and Orange AMOLED
-        if(theme == 10) { return [0x191b33, 0x0055AA, 0x191b33, 0x3495d4, 0x5fa6d4, 0xffffff, 0x0055AA, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Blue AMOLED
-        if(theme == 11) { return [0x333333, 0xFFAA00, 0x333333, 0xff7600, 0xff9133, 0xffffff, 0x9a9a9a, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Orange AMOLED
-        if(theme == 12) { return [0x333333, 0xFFFFFF, 0x333333, 0xFFFFFF, 0xcbcbcb, 0xFFFFFF, 0x9a9a9a, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on black AMOLED
-        if(theme == 13) { return [0xCCCCCC, 0x000000, 0xCCCCCC, 0x000000, 0x666666, 0x000000, 0x9a9a9a, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Black on White AMOLED
-        if(theme == 14) { return [0xCCCCCC, 0xAA0000, 0xCCCCCC, 0xAA0000, 0xaa2325, 0x000000, 0x9a9a9a, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Red on White AMOLED
-        if(theme == 15) { return [0xCCCCCC, 0x0000AA, 0xCCCCCC, 0x0000AA, 0x2222aa, 0x000000, 0x9a9a9a, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Blue on White AMOLED
-        if(theme == 16) { return [0xCCCCCC, 0x00AA00, 0xCCCCCC, 0x00AA00, 0x22aa22, 0x000000, 0x9a9a9a, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Green on White AMOLED
-        if(theme == 17) { return [0xCCCCCC, 0x555555, 0xCCCCCC, 0xFF5500, 0xff7632, 0x000000, 0x9a9a9a, 0x000000, 0xFF5500, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Orange on White AMOLED
-        if(theme == 18) { return [0x152b19, 0xFF5500, 0x152b19, 0xff7600, 0xe64322, 0x41cb41, 0x5f9956, 0x41cb41, 0xff7600, 0x59b9fe, 0x000000, 0x41cb41, 0xFFFFFF]; } // Green and Orange AMOLED
-        if(theme == 19) { return [0x152b19, 0xa8aa6c, 0x152b19, 0x889f4a, 0x919f6b, 0x889f4a, 0x7a9a4e, 0x00FF55, 0x889f4a, 0x55AA55, 0x000000, 0x55AA55, 0xe3efd2]; } // Green Camo AMOLED
-        if(theme == 20) { return [0x282828, 0xFF0000, 0x282828, 0xFF0000, 0xff3236, 0xFFFFFF, 0x9a9a9a, 0x55AAFF, 0xFF5555, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Red on Black AMOLED
-        if(theme == 21) { return [0xCCCCCC, 0xAA00FF, 0xCCCCCC, 0xAA00FF, 0xbb34ff, 0x000000, 0x9a9a9a, 0x000000, 0xFF5500, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Purple on White AMOLED
-        if(theme == 22) { return [0x282828, 0xAA55AA, 0x282828, 0xAA55AA, 0xaa77aa, 0xFFFFFF, 0x9a9a9a, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Purple on black AMOLED
-                          return [0x302b24, 0xffac3f, 0x302b24, 0xff960c, 0xffbf65, 0xffb759, 0x9a784d, 0xa8d6fd, 0xfdb500, 0xa8d6fd, 0x000000, 0xffdeb4, 0xe3efd2]; // Amber AMOLED
+        //                       fieldBg,   fieldLbl, clockBg,  clock,    outline,  date,     dateDim,  notif,    stress,   bodybatt, bg,       dataVal,  moon
+        if(theme == 0 ) { return [0x0e333c, 0x55AAAA, 0x0d333c, 0xfbcb77, 0xffeac4, 0xfbcb77, 0xdbaf6c, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Yellow on turquoise AMOLED
+        if(theme == 1 ) { return [0x0e333c, 0xAA55AA, 0x0f3b46, 0xffa5f9, 0xffd9fc, 0xFFFFFF, 0xcc63b9, 0xFF55AA, 0xFF55AA, 0x00FFAA, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Hot pink AMOLED
+        if(theme == 2 ) { return [0x0f2246, 0x55AAAA, 0x0f2246, 0x89efd2, 0xb8efdf, 0x89efd2, 0x7ad6bd, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Blueish green AMOLED
+        if(theme == 3 ) { return [0x152b19, 0x00AA55, 0x152b19, 0x96e0ac, 0xc3e0cc, 0x96e0ac, 0x7ad6bd, 0x00AAFF, 0xffc884, 0x59b9fe, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Very green AMOLED
+        if(theme == 4 ) { return [0x0e333c, 0x55AAAA, 0x0d333c, 0xFFFFFF, 0xadeffe, 0xFFFFFF, 0x27a8cc, 0xAAAAAA, 0xFFAA55, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on turquoise AMOLED
+        if(theme == 5 ) { return [0x1b263d, 0xFFAAAA, 0x1b263d, 0xff9161, 0xffb494, 0xffb383, 0xde9070, 0xFFFFFF, 0xFF5555, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Peachy Orange AMOLED
+        if(theme == 6 ) { return [0x550000, 0xFF0000, 0x550000, 0xffffff, 0xc00003, 0xffffff, 0xde0004, 0xFF0000, 0xAA0000, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Red and White AMOLED
+        if(theme == 7 ) { return [0x152a53, 0x0055AA, 0x152a53, 0xffffff, 0xaecaff, 0xffffff, 0x006fde, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on Blue AMOLED
+        if(theme == 8 ) { return [0x152a53, 0x0055AA, 0x152a53, 0xfbcb77, 0xfbdda8, 0xffeac4, 0xdbaf6c, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Yellow on Blue AMOLED
+        if(theme == 9 ) { return [0x58250b, 0xFF5500, 0x7d3f01, 0xffffff, 0xffd6ae, 0xffffff, 0xde6f00, 0x00AAFF, 0xFFAA00, 0x00AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White and Orange AMOLED
+        if(theme == 10) { return [0x191b33, 0x0055AA, 0x191b33, 0x3495d4, 0x5fa6d4, 0xffffff, 0x006fde, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Blue AMOLED
+        if(theme == 11) { return [0x333333, 0xFFAA00, 0x333333, 0xff7600, 0xff9133, 0xffffff, 0xcccccc, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Orange AMOLED
+        if(theme == 12) { return [0x333333, 0xFFFFFF, 0x333333, 0xFFFFFF, 0xcbcbcb, 0xFFFFFF, 0xcccccc, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // White on black AMOLED
+        if(theme == 13) { return [0xCCCCCC, 0x000000, 0xCCCCCC, 0x000000, 0x666666, 0x000000, 0xcccccc, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Black on White AMOLED
+        if(theme == 14) { return [0xCCCCCC, 0xAA0000, 0xCCCCCC, 0xAA0000, 0xaa2325, 0x000000, 0xcccccc, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Red on White AMOLED
+        if(theme == 15) { return [0xCCCCCC, 0x0000AA, 0xCCCCCC, 0x0000AA, 0x2222aa, 0x000000, 0xcccccc, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Blue on White AMOLED
+        if(theme == 16) { return [0xCCCCCC, 0x00AA00, 0xCCCCCC, 0x00AA00, 0x22aa22, 0x000000, 0xcccccc, 0x000000, 0xFFAA00, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Green on White AMOLED
+        if(theme == 17) { return [0xCCCCCC, 0x555555, 0xCCCCCC, 0xFF5500, 0xff7632, 0x000000, 0xcccccc, 0x000000, 0xFF5500, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Orange on White AMOLED
+        if(theme == 18) { return [0x152b19, 0xFF5500, 0x152b19, 0xff7600, 0xe64322, 0x41cb41, 0x7fcc73, 0x41cb41, 0xff7600, 0x59b9fe, 0x000000, 0x41cb41, 0xFFFFFF]; } // Green and Orange AMOLED
+        if(theme == 19) { return [0x152b19, 0xa8aa6c, 0x152b19, 0x889f4a, 0x919f6b, 0x889f4a, 0xa2cd68, 0x00FF55, 0x889f4a, 0x55AA55, 0x000000, 0x55AA55, 0xe3efd2]; } // Green Camo AMOLED
+        if(theme == 20) { return [0x282828, 0xFF0000, 0x282828, 0xFF0000, 0xff3236, 0xFFFFFF, 0xcccccc, 0x55AAFF, 0xFF5555, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Red on Black AMOLED
+        if(theme == 21) { return [0xCCCCCC, 0xAA00FF, 0xCCCCCC, 0xAA00FF, 0xbb34ff, 0x000000, 0xcccccc, 0x000000, 0xFF5500, 0x55AAFF, 0xFFFFFF, 0x000000, 0x555555]; } // Purple on White AMOLED
+        if(theme == 22) { return [0x282828, 0xAA55AA, 0x282828, 0xAA55AA, 0xaa77aa, 0xFFFFFF, 0xcccccc, 0x55AAFF, 0xFFAA00, 0x55AAFF, 0x000000, 0xFFFFFF, 0xFFFFFF]; } // Purple on black AMOLED
+                          return [0x302b24, 0xffac3f, 0x302b24, 0xff960c, 0xffbf65, 0xffb759, 0xcc9f66, 0xa8d6fd, 0xfdb500, 0xa8d6fd, 0x000000, 0xffdeb4, 0xe3efd2]; // Amber AMOLED
         //                       fieldBg,   fieldLbl, clockBg,  clock,    outline,  date,     dateDim,  notif,    stress,   bodybatt, bg,       dataVal,  moon
 
     }
@@ -940,7 +940,7 @@ class Segment34View extends WatchUi.WatchFace {
             hsv2rgb(h1, 0.95 * s1, 1.0), // clock
             hsv2rgb(h1, 0.55 * s1, 1.0), // outline
             hsv2rgb(h1, 0.65 * s1, 1.0), // date
-            hsv2rgb(h1, 0.50 * s1, 0.60), // dateDim
+            hsv2rgb(h1, 0.50 * s1, 0.80), // dateDim
             0x55AAFF, // notif
             0xFFAA00, // stress
             0x55AAFF, // bodybatt
@@ -969,7 +969,7 @@ class Segment34View extends WatchUi.WatchFace {
             hsv2rgb(h1, 0.25 * s1, 0.95), // clock
             hsv2rgb(h1, 0.55 * s1, 1.0), // outline
             hsv2rgb(h1, 0.25 * s1, 0.95), // date
-            hsv2rgb(h1, 0.15 * s1, 0.60), // dateDim
+            hsv2rgb(h1, 0.15 * s1, 0.80), // dateDim
             0x55AAFF, // notif
             0xFFAA00, // stress
             0x55AAFF, // bodybatt
@@ -998,10 +998,10 @@ class Segment34View extends WatchUi.WatchFace {
             hsv2rgb(h1, 1.0 * s1, 1.0), // clock
             hsv2rgb(h1, 0.55 * s1, 1.0), // outline
             hsv2rgb(h1, 0.75 * s1, 0.95), // date
-            hsv2rgb(h1, 0.75 * s1, 0.60), // dateDim
-            0x6da3d8, // notif
-            0xe5be72, // stress
-            0x6da3d8, // bodybatt
+            hsv2rgb(h1, 0.75 * s1, 0.80), // dateDim
+            hsv2rgb(h2, 0.95 * s2, 1.0), // notif
+            hsv2rgb(h1, 1.0 * s1, 1.0), // stress
+            hsv2rgb(h2, 0.95 * s2, 1.0), // bodybatt
             0x000000, // bg
             hsv2rgb(h1, 0.75 * s1, 1.0), // dataVal
             hsv2rgb(h1, 0.10 * s1, 1.0), // moon
@@ -1027,7 +1027,7 @@ class Segment34View extends WatchUi.WatchFace {
             hsv2rgb(h1, 1.0 * s1, 1.0), // clock
             hsv2rgb(h1, 0.55 * s1, 1.0), // outline
             hsv2rgb(h2, 0.75 * s2, 0.95), // date
-            hsv2rgb(h2, 0.75 * s2, 0.60), // dateDim
+            hsv2rgb(h2, 0.75 * s2, 0.80), // dateDim
             0x6da3d8, // notif
             0xe5be72, // stress
             0x6da3d8, // bodybatt
@@ -1908,6 +1908,9 @@ class Segment34View extends WatchUi.WatchFace {
             max = iterator.getMax();
         }
         var min = iterator.getMin();
+        if(min == null or max == null) {
+            return ret;
+        }
         var diff = max - (min * 0.9);
         var sample = iterator.next();
         var count = 0;
