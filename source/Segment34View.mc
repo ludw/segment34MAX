@@ -163,14 +163,17 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     const clockBgText = "#####";
-    (:MIP) const bottomFieldBg = "#";
+
+    (:Round240) const bottomFieldBg = "#";
+    (:Round260) const bottomFieldBg = "#";
+    (:Round280) const bottomFieldBg = "$";
+    (:Round360) const bottomFieldBg = "#";
     (:Round390) const bottomFieldBg = "#";
     (:Round416) const bottomFieldBg = "#";
     (:Round454) const bottomFieldBg = "#";
-    (:Round360) const bottomFieldBg = "$";
 
     (:Round240) const bottomFieldWidths = [4, 4, 0];
-    (:Round260) const bottomFieldWidths = [4, 4, 0];
+    (:Round260) const bottomFieldWidths = [3, 3, 3];
     (:Round280) const bottomFieldWidths = [4, 3, 0];
     (:Round360) const bottomFieldWidths = [3, 3, 3];
     (:Round390) const bottomFieldWidths = [4, 3, 0];
@@ -676,9 +679,9 @@ class Segment34View extends WatchUi.WatchFace {
         var dw2 = Math.round(digits[1] * data_width / tot_digits);
         var dw3 = Math.round(digits[2] * data_width / tot_digits);
 
-        drawDataField(dc, left_edge + Math.round(dw1 / 2), y2, 3, dataLabelBottomLeft, dataBottomLeft, "#", digits[0], fontLargeData);
-        drawDataField(dc, left_edge + Math.round(dw1 + (dw2 / 2)), y2, 3, dataLabelBottomMiddle, dataBottomMiddle, "#", digits[1], fontLargeData);
-        drawDataField(dc, left_edge + Math.round(dw1 + dw2 + (dw3 / 2)), y2, 3, dataLabelBottomRight, dataBottomRight, "#", digits[2], fontLargeData);
+        drawDataField(dc, left_edge + Math.round(dw1 / 2), y2, 3, dataLabelBottomLeft, dataBottomLeft, bottomFieldBg, digits[0], fontLargeData);
+        drawDataField(dc, left_edge + Math.round(dw1 + (dw2 / 2)), y2, 3, dataLabelBottomMiddle, dataBottomMiddle, bottomFieldBg, digits[1], fontLargeData);
+        drawDataField(dc, left_edge + Math.round(dw1 + dw2 + (dw3 / 2)), y2, 3, dataLabelBottomRight, dataBottomRight, bottomFieldBg, digits[2], fontLargeData);
 
         
         // Draw the 5 digit bottom field
@@ -1962,7 +1965,7 @@ class Segment34View extends WatchUi.WatchFace {
         // Handle HR special case
         if(complicationType == 10) {
             var isLive = (Activity.getActivityInfo().currentHeartRate != null);
-            return (labelSize == 1) ? "HR:" : (isLive ? "LIVE HR:" : "LAST HR:");
+            return (labelSize <= 2) ? "HR:" : (isLive ? "LIVE HR:" : "LAST HR:");
         }
         
         // Handle all other cases with standard patterns
@@ -2023,7 +2026,7 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     hidden function formatLabel(short as String, mid as String, size as Number) as String {
-        if(size == 1) { return short + ":"; }
+        if(size <= 2) { return short + ":"; }
         return mid + ":";
     }
 
