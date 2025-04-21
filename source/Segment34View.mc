@@ -29,7 +29,6 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var halfClockHeight as Number;
     hidden var halfClockWidth as Number;
     hidden var barBottomAdj as Number = 0;
-    hidden var bottomFiveAdj as Number = 0;
     hidden var fieldSpaceingAdj as Number = 0;
     hidden var textSideAdj as Number = 0;
     hidden var iconYAdj as Number = 0;
@@ -45,6 +44,7 @@ class Segment34View extends WatchUi.WatchFace {
     (:initialized) hidden var fontClockOutline as WatchUi.FontResource;
     (:initialized) hidden var fontLabel as WatchUi.FontResource;
     (:initialized) hidden var fontTinyData as WatchUi.FontResource;
+    (:initialized) hidden var fontTinyDataPlus as WatchUi.FontResource;
     (:initialized) hidden var fontSmallData as WatchUi.FontResource;
     (:initialized) hidden var fontLargeData as WatchUi.FontResource;
     (:initialized) hidden var fontAODData as WatchUi.FontResource;
@@ -66,8 +66,6 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var dataBottomLeft as String = "";
     hidden var dataBottomMiddle as String = "";
     hidden var dataBottomRight as String = "";
-    hidden var dataBottomFourth as String = "";
-    hidden var dataBottom as String = "";
     hidden var dataIcon1 as String = "";
     hidden var dataIcon2 as String = "";
     hidden var dataBattery as String = "";
@@ -112,7 +110,6 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var propLeftValueShows as Number = 6;
     hidden var propMiddleValueShows as Number = 10;
     hidden var propRightValueShows as Number = 0;
-    hidden var propFourthValueShows as Number = 0;
     hidden var propAlwaysShowSeconds as Boolean = false;
     hidden var propUpdateFreq as Number = 5;
     hidden var propShowClockBg as Boolean = true;
@@ -120,7 +117,6 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var propAodFieldShows as Number = -1;
     hidden var propAodRightFieldShows as Number = -2;
     hidden var propDateFieldShows as Number = -1;
-    hidden var propBottomFieldShows as Number = 17;
     hidden var propAodAlignment as Number = 0;
     hidden var propDateAlignment as Number = 0;
     hidden var propBottomFieldAlignment as Number = 2;
@@ -173,13 +169,13 @@ class Segment34View extends WatchUi.WatchFace {
     (:Round454) const bottomFieldBg = "#";
     (:Round360) const bottomFieldBg = "$";
 
-    (:Round240) const bottomFieldWidths = [3, 3, 0, 0];
-    (:Round260) const bottomFieldWidths = [4, 4, 0, 0];
-    (:Round280) const bottomFieldWidths = [4, 3, 0, 0];
-    (:Round360) const bottomFieldWidths = [2, 3, 2, 0];
-    (:Round390) const bottomFieldWidths = [4, 3, 0, 0];
-    (:Round416) const bottomFieldWidths = [4, 4, 0, 0];
-    (:Round454) const bottomFieldWidths = [4, 4, 0, 0];
+    (:Round240) const bottomFieldWidths = [4, 4, 0];
+    (:Round260) const bottomFieldWidths = [4, 4, 0];
+    (:Round280) const bottomFieldWidths = [4, 3, 0];
+    (:Round360) const bottomFieldWidths = [3, 3, 3];
+    (:Round390) const bottomFieldWidths = [4, 3, 0];
+    (:Round416) const bottomFieldWidths = [4, 4, 0];
+    (:Round454) const bottomFieldWidths = [4, 4, 0];
 
     (:Round240) const barWidth = 3;
     (:Round260) const barWidth = 3;
@@ -221,6 +217,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden function loadResources() as Void {
         fontClock = Application.loadResource(Rez.Fonts.segments80narrow);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_small_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_small); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_lines); }
@@ -238,13 +235,13 @@ class Segment34View extends WatchUi.WatchFace {
         largeDataHeight = 20;
 
         baseX = centerX;
-        baseY = centerY - 10;
+        baseY = centerY - 15;
         fieldSpaceingAdj = 10;
         barBottomAdj = 1;
-        histogramBarWidth = 1;
-        histogramBarSpacing = 1;
-        histogramHeight = 15;
-        histogramTargetWidth = 30;
+        histogramBarWidth = 2;
+        histogramBarSpacing = 2;
+        histogramHeight = 25;
+        histogramTargetWidth = 25;
         hideLine2 = true;
     }
 
@@ -252,6 +249,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden function loadResources() as Void {
         fontClock = Application.loadResource(Rez.Fonts.segments80);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_small_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
@@ -264,14 +262,13 @@ class Segment34View extends WatchUi.WatchFace {
         clockWidth = 227;
         labelHeight = 8;
         labelMargin = 5;
-        tinyDataHeight = 8;
+        tinyDataHeight = 10;
         smallDataHeight = 20;
         largeDataHeight = 20;
 
         baseX = centerX + 1;
         baseY = centerY - 10;
         fieldSpaceingAdj = 15;
-        bottomFiveAdj = 2;
         barBottomAdj = 1;
         histogramBarWidth = 2;
         histogramBarSpacing = 2;
@@ -284,6 +281,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden function loadResources() as Void {
         fontClock = Application.loadResource(Rez.Fonts.segments80wide);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_small_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_inbetween); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
@@ -301,14 +299,14 @@ class Segment34View extends WatchUi.WatchFace {
         smallDataHeight = 20;
         largeDataHeight = 27;
 
-        marginY = 8;
+        marginY = 7;
         baseX = centerX;
-        baseY = centerY - 10;
-        bottomFiveAdj = 5;
+        baseY = centerY - 8;
         barBottomAdj = 1;
-        histogramBarWidth = 1;
-        histogramBarSpacing = 1;
+        histogramBarWidth = 2;
+        histogramBarSpacing = 2;
         histogramHeight = 20;
+        histogramTargetWidth = 25;
         iconYAdj = 0;
     }
 
@@ -317,12 +315,13 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125narrow);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125narrowoutline);
         fontTinyData = Application.loadResource(Rez.Fonts.storre);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_small_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         fontLargeData = Application.loadResource(Rez.Fonts.led_big);
         fontBottomData = Application.loadResource(Rez.Fonts.led);
-        fontLabel = Application.loadResource(Rez.Fonts.smol);
+        fontLabel = Application.loadResource(Rez.Fonts.storre);
         fontAODData = fontBottomData;
         fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
@@ -336,20 +335,20 @@ class Segment34View extends WatchUi.WatchFace {
         clockHeight = 125;
         clockWidth = 345;
         labelHeight = 8;
-        labelMargin = 5;
+        labelMargin = 7;
         tinyDataHeight = 10;
         smallDataHeight = 25;
         largeDataHeight = 27;
 
         baseX = centerX;
-        baseY = centerY - smallDataHeight + 4;
-        fieldSpaceingAdj = 20;
+        baseY = centerY - 5;
+        fieldSpaceingAdj = 15;
         barBottomAdj = 2;
-        textSideAdj = 10;
-        iconYAdj = -4;
+        textSideAdj = 15;
         marginY = 10;
         histogramHeight = 20;
         histogramTargetWidth = 30;
+        
     }
 
     (:Round390)
@@ -357,6 +356,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
@@ -382,12 +382,13 @@ class Segment34View extends WatchUi.WatchFace {
         largeDataHeight = 40;
 
         baseX = centerX;
-        baseY = centerY - 15;
+        baseY = centerY - 25;
+        marginY = 16;
         barBottomAdj = 2;
-        bottomFiveAdj = 6;
         fieldSpaceingAdj = 20;
-        histogramHeight = 20;
-        histogramTargetWidth = 30;
+        histogramHeight = 35;
+        histogramTargetWidth = 40;
+        hideLine2 = true;
     }
 
     (:Round416)
@@ -395,6 +396,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments125);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments125outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
@@ -420,10 +422,10 @@ class Segment34View extends WatchUi.WatchFace {
         largeDataHeight = 40;
 
         baseX = centerX;
-        baseY = centerY - 15;
+        baseY = centerY - 10;
         fieldSpaceingAdj = 25;
         barBottomAdj = 2;
-        bottomFiveAdj = 8;
+        marginY = 12;
         histogramHeight = 25;
     }
 
@@ -432,6 +434,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontClock = Application.loadResource(Rez.Fonts.segments145);
         fontClockOutline = Application.loadResource(Rez.Fonts.segments145outline);
         fontTinyData = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_big); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_readable); }
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
@@ -457,14 +460,13 @@ class Segment34View extends WatchUi.WatchFace {
         largeDataHeight = 40;
 
         baseX = centerX + 3;
-        baseY = centerY - 10;
+        baseY = centerY - 5;
         fieldSpaceingAdj = 20;
         textSideAdj = 4;
-        bottomFiveAdj = 4;
         barBottomAdj = 2;
-        marginY = 16;
-        histogramHeight = 40;
-        histogramTargetWidth = 50;
+        marginY = 14;
+        histogramHeight = 35;
+        histogramTargetWidth = 45;
     }
 
     // Load your resources here
@@ -562,11 +564,12 @@ class Segment34View extends WatchUi.WatchFace {
         dc.clear();
         var yn1 = baseY - halfClockHeight - marginY - smallDataHeight;
         var yn2 = yn1 - marginY - smallDataHeight;
-        if(hideLine2) { yn2 = yn1 - marginY; }
-        var yn3 = yn2 - marginY - histogramHeight;
+        if(hideLine2) { yn2 = yn1; }
+        var yn3 = yn2 - marginY - labelHeight - halfMarginY - tinyDataHeight;
 
         // Draw Top data fields or histogram
         if(propTopPartShows == 2) {
+            yn3 = yn2 - marginY - histogramHeight;
             drawHistogram(dc, dataGraph1, centerX, yn3, histogramHeight);
         } else {
             var top_data_height = 0;
@@ -590,7 +593,7 @@ class Segment34View extends WatchUi.WatchFace {
                 dc.setColor(themeColors[moon], Graphics.COLOR_TRANSPARENT);
                 dc.drawText(centerX, yn3 + ((top_data_height + tinyDataHeight) / 2), fontMoon, dataMoon, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             } else {
-                if(top_data_height == 0) { top_field_font = fontSmallData; }
+                if(propLabelVisibility == 1 or propLabelVisibility == 2) { top_field_font = fontTinyDataPlus; top_data_height = halfMarginY; }
                 dc.drawText(centerX - top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopLeft, Graphics.TEXT_JUSTIFY_RIGHT);
                 dc.drawText(centerX + top_field_center_offset, yn3 + top_data_height, top_field_font, dataTopRight, Graphics.TEXT_JUSTIFY_LEFT);
             }
@@ -601,7 +604,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(!hideLine2) {
             dc.drawText(centerX, yn2, fontSmallData, dataAboveLine1, Graphics.TEXT_JUSTIFY_CENTER);
         }
-        dc.drawText(centerX, yn1, fontSmallData, dataAboveLine2, Graphics.TEXT_JUSTIFY_CENTER);        
+        dc.drawText(centerX, yn1, fontSmallData, dataAboveLine2, Graphics.TEXT_JUSTIFY_CENTER);
 
         // Draw Clock
         dc.setColor(themeColors[clockBg], Graphics.COLOR_TRANSPARENT);
@@ -668,16 +671,14 @@ class Segment34View extends WatchUi.WatchFace {
         var data_width = Math.sqrt(centerY*centerY - (y3 - centerY)*(y3 - centerY)) * 2 + fieldSpaceingAdj;
         var left_edge = Math.round((screenWidth - data_width) / 2);
         var digits = getFieldWidths();
-        var tot_digits = digits[0] + digits[1] + digits[2] + digits[3];
+        var tot_digits = digits[0] + digits[1] + digits[2];
         var dw1 = Math.round(digits[0] * data_width / tot_digits);
         var dw2 = Math.round(digits[1] * data_width / tot_digits);
         var dw3 = Math.round(digits[2] * data_width / tot_digits);
-        var dw4 = Math.round(digits[3] * data_width / tot_digits);
 
         drawDataField(dc, left_edge + Math.round(dw1 / 2), y2, 3, dataLabelBottomLeft, dataBottomLeft, "#", digits[0], fontLargeData);
         drawDataField(dc, left_edge + Math.round(dw1 + (dw2 / 2)), y2, 3, dataLabelBottomMiddle, dataBottomMiddle, "#", digits[1], fontLargeData);
         drawDataField(dc, left_edge + Math.round(dw1 + dw2 + (dw3 / 2)), y2, 3, dataLabelBottomRight, dataBottomRight, "#", digits[2], fontLargeData);
-        drawDataField(dc, left_edge + Math.round(dw1 + dw2 + dw3 + (dw4 / 2)), y2, 3, dataLabelBottomFourth, dataBottomFourth, "#", digits[3], fontLargeData);
 
         
         // Draw the 5 digit bottom field
@@ -689,7 +690,6 @@ class Segment34View extends WatchUi.WatchFace {
 
         // Draw icons
         dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
-        if(screenHeight == 240) { batt_width += 30; }
         dc.drawText(centerX - (batt_width / 2) - (marginX / 2), y4 + 10 + iconYAdj, fontIcons, dataIcon1, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(centerX + (batt_width / 2) + (marginX / 2) - 2, y4 + 10 + iconYAdj, fontIcons, dataIcon2, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         
@@ -734,29 +734,23 @@ class Segment34View extends WatchUi.WatchFace {
         if(propFieldLayout == 0) { // Auto
             return bottomFieldWidths;
         } else if(propFieldLayout == 1) {
-            return [3, 3, 3, 0];
+            return [3, 3, 3];
         } else if(propFieldLayout == 2) {
-            return [3, 4, 3, 0];
+            return [4, 3, 0];
         } else if(propFieldLayout == 3) {
-            return [3, 3, 4, 0];
+            return [3, 4, 0];
         } else if(propFieldLayout == 4) {
-            return [4, 3, 3, 0];
+            return [4, 4, 0];
         } else if(propFieldLayout == 5) {
-            return [4, 3, 4, 0];
+            return [2, 3, 2];
         } else if(propFieldLayout == 6) {
-            return [3, 4, 4, 0];
+            return [2, 4, 2];
         } else if(propFieldLayout == 7) {
-            return [4, 4, 3, 0];
+            return [5, 3, 0];
         } else if(propFieldLayout == 8) {
-            return [4, 4, 4, 0];
-        } else if(propFieldLayout == 9) {
-            return [3, 3, 3, 3];
-        } else if(propFieldLayout == 10) {
-            return [3, 3, 3, 4];
-        } else if(propFieldLayout == 11) {
-            return [4, 3, 3, 3];
+            return [3, 5, 0];
         } else {
-            return [4, 4, 0, 0];
+            return [5, 0, 0];
         } 
     }
 
@@ -774,6 +768,8 @@ class Segment34View extends WatchUi.WatchFace {
             dc.drawText(x - (value_bg_width / 2) + adjX, y, fontLabel, label, Graphics.TEXT_JUSTIFY_LEFT);
 
             data_y += labelHeight + labelMargin;
+        } else {
+            data_y += labelMargin;
         }
 
         if(propShowDataBg) {
@@ -1135,8 +1131,6 @@ class Segment34View extends WatchUi.WatchFace {
         propLeftValueShows = Application.Properties.getValue("leftValueShows") as Number;
         propMiddleValueShows = Application.Properties.getValue("middleValueShows") as Number;
         propRightValueShows = Application.Properties.getValue("rightValueShows") as Number;
-        propFourthValueShows = Application.Properties.getValue("fourthValueShows") as Number;
-        propBottomFieldShows = Application.Properties.getValue("bottomFieldShows") as Number;
         propIcon1 = Application.Properties.getValue("icon1") as Number;
         propIcon2 = Application.Properties.getValue("icon2") as Number;
         propBatteryVariant = Application.Properties.getValue("batteryVariant") as Number;
@@ -1183,8 +1177,6 @@ class Segment34View extends WatchUi.WatchFace {
         dataBottomLeft = getValueByType(propLeftValueShows, fieldWidths[0]);
         dataBottomMiddle = getValueByType(propMiddleValueShows, fieldWidths[1]);
         dataBottomRight = getValueByType(propRightValueShows, fieldWidths[2]);
-        dataBottomFourth = getValueByType(propFourthValueShows, fieldWidths[3]);
-        dataBottom = getValueByType(propBottomFieldShows, 5);
         dataIcon1 = getIconState(propIcon1);
         dataIcon2 = getIconState(propIcon2);
         dataBattery = getBattData();
@@ -1196,7 +1188,6 @@ class Segment34View extends WatchUi.WatchFace {
         dataLabelBottomLeft = getLabelByType(propLeftValueShows, fieldWidths[0] - 1);
         dataLabelBottomMiddle = getLabelByType(propMiddleValueShows, fieldWidths[1] - 1);
         dataLabelBottomRight = getLabelByType(propRightValueShows, fieldWidths[2] - 1);
-        dataLabelBottomFourth = getLabelByType(propFourthValueShows, fieldWidths[3] - 1);
 
         if(!infoMessage.equals("")) {
             dataBelow = infoMessage;
