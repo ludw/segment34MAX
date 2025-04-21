@@ -325,15 +325,11 @@ class Segment34View extends WatchUi.WatchFace {
         fontLargeData = Application.loadResource(Rez.Fonts.led_big);
         fontBottomData = Application.loadResource(Rez.Fonts.led);
         fontLabel = Application.loadResource(Rez.Fonts.storre);
-        fontAODData = fontBottomData;
+        fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        if(propClockOutlineStyle == 0 or propClockOutlineStyle == 2) {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod) as BitmapResource;
-        } else {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
-        }
+        drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
         clockWidth = 345;
@@ -366,15 +362,11 @@ class Segment34View extends WatchUi.WatchFace {
         fontLargeData = Application.loadResource(Rez.Fonts.led_bigger);
         fontBottomData = fontLargeData;
         fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
-        fontAODData = Application.loadResource(Rez.Fonts.led);
+        fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        if(propClockOutlineStyle == 0 or propClockOutlineStyle == 2) {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod) as BitmapResource;
-        } else {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
-        }
+        drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
         clockWidth = 355;
@@ -406,15 +398,11 @@ class Segment34View extends WatchUi.WatchFace {
         fontLargeData = Application.loadResource(Rez.Fonts.led_bigger);
         fontBottomData = fontLargeData;
         fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
-        fontAODData = Application.loadResource(Rez.Fonts.led);
+        fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        if(propClockOutlineStyle == 0 or propClockOutlineStyle == 2) {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod) as BitmapResource;
-        } else {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
-        }
+        drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
         clockWidth = 360;
@@ -448,11 +436,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontBattery = fontTinyData;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        if(propClockOutlineStyle == 0 or propClockOutlineStyle == 2) {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod) as BitmapResource;
-        } else {
-            drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
-        }
+        drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 145;
         clockWidth = 413;
@@ -721,16 +705,20 @@ class Segment34View extends WatchUi.WatchFace {
 
         // Draw clock gradient
         dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), baseY - halfClockHeight, drawAODPattern);
+        dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), baseY - halfClockHeight, drawGradient);
 
         // Draw Line below clock
         var y1 = baseY + halfClockHeight + marginY;
         dc.setColor(themeColors[dateDim], Graphics.COLOR_TRANSPARENT);
         if(propAodAlignment == 0) {
-            dc.drawText(baseX - halfClockWidth + textSideAdj - (now.min % 3), y1, fontAODData, dataAODLeft, Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(baseX - halfClockWidth + textSideAdj, y1, fontAODData, dataAODLeft, Graphics.TEXT_JUSTIFY_LEFT);
         } else {
-            dc.drawText(baseX - (now.min % 3), y1, fontAODData, dataAODLeft, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(baseX, y1, fontAODData, dataAODLeft, Graphics.TEXT_JUSTIFY_CENTER);
         }
-        dc.drawText(baseX + halfClockWidth - textSideAdj - 2 - (now.min % 3), y1, fontAODData, dataAODRight, Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(baseX + halfClockWidth - textSideAdj - 2, y1, fontAODData, dataAODRight, Graphics.TEXT_JUSTIFY_RIGHT);
+
+        // Draw text overlay
+        dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), y1, drawAODPattern);
     }
 
     hidden function getFieldWidths() as Array<Number> {
