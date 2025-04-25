@@ -37,7 +37,8 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var histogramHeight as Number = 20;
     hidden var histogramTargetWidth as Number = 40;
     hidden var hideLine2 as Boolean = false;
-
+    hidden var clipWidth as Number = 0;
+    
     hidden var fontMoon as WatchUi.FontResource;
     hidden var fontIcons as WatchUi.FontResource;
     (:initialized) hidden var fontClock as WatchUi.FontResource;
@@ -86,7 +87,7 @@ class Segment34View extends WatchUi.WatchFace {
     public var nightModeOverride as Number = -1;
     hidden var themeColors as Array<Graphics.ColorType> = [];
     hidden var nightMode as Boolean?;
-    hidden var weatherCondition as CurrentConditions?;
+    hidden var weatherCondition as CurrentConditions or StoredWeather or Null;
     hidden var hrHistoryData as Array<Number>?;
     hidden var canBurnIn as Boolean = false;
     hidden var isSleeping as Boolean = false;
@@ -236,6 +237,7 @@ class Segment34View extends WatchUi.WatchFace {
         tinyDataHeight = 8;
         smallDataHeight = 13;
         largeDataHeight = 20;
+        clipWidth = 24;
 
         baseX = centerX;
         baseY = centerY - 15;
@@ -268,10 +270,11 @@ class Segment34View extends WatchUi.WatchFace {
         tinyDataHeight = 10;
         smallDataHeight = 20;
         largeDataHeight = 20;
+        clipWidth = 34;
 
         baseX = centerX + 1;
         baseY = centerY - 10;
-        fieldSpaceingAdj = 10;
+        fieldSpaceingAdj = 5;
         barBottomAdj = 1;
         histogramBarWidth = 2;
         histogramBarSpacing = 2;
@@ -301,6 +304,7 @@ class Segment34View extends WatchUi.WatchFace {
         tinyDataHeight = 10;
         smallDataHeight = 20;
         largeDataHeight = 27;
+        clipWidth = 34;
 
         marginY = 7;
         baseX = centerX;
@@ -530,19 +534,18 @@ class Segment34View extends WatchUi.WatchFace {
         if(!propAlwaysShowSeconds) { return; }
         doesPartialUpdate = true;
 
-        var clip_width = 24;
-        var clip_height = 20;
         var now = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         var y1 = baseY + halfClockHeight + marginY;
 
         updateSeconds(now);
         
-        dc.setClip(baseX + halfClockWidth - textSideAdj - clip_width, y1, clip_width, clip_height);
+        dc.setClip(baseX + halfClockWidth - textSideAdj - clipWidth, y1, clipWidth, smallDataHeight);
         dc.setColor(themeColors[bg], themeColors[bg]);
         dc.clear();
 
         dc.setColor(themeColors[date], Graphics.COLOR_TRANSPARENT);
         dc.drawText(baseX + halfClockWidth - textSideAdj, y1, fontSmallData, dataSeconds, Graphics.TEXT_JUSTIFY_RIGHT);
+        
     }
 
     hidden function drawWatchface(dc as Dc, now as Gregorian.Info) as Void {
@@ -1359,18 +1362,93 @@ class Segment34View extends WatchUi.WatchFace {
     hidden function updateWeather() as Void {
         if(!(Toybox has :Weather) or !(Weather has :getCurrentConditions)) { return; }
 
-        var now = Time.now().value();
-
-        // Clear cached weather if older than 3 hours
-        if(weatherCondition != null 
-           and weatherCondition.observationTime != null 
-           and (now - weatherCondition.observationTime.value() > 3600 * 3)) {
-            weatherCondition = null;
-        }
-
-        if(Weather.getCurrentConditions != null) {
+        if(Weather.getCurrentConditions() != null) {
             weatherCondition = Weather.getCurrentConditions();
+            try {
+                storeWeatherData();
+            } catch(e) {}
+        } else {
+            try {
+                weatherCondition = readWeatherData();
+            } catch(e) {}
+            
         }
+        
+    }
+
+    hidden function storeWeatherData() as Void {
+        var cc = Weather.getCurrentConditions();
+        var cc_data = {};
+        if(cc != null) {
+            cc_data["timestamp"] = Time.now().value();
+            if(cc.observationLocationPosition != null) {
+                cc_data["observationLocationPosition"] = cc.observationLocationPosition.toDegrees();
+            }
+            if(cc.condition != null) { cc_data["condition"] = cc.condition; }
+            if(cc.highTemperature != null) { cc_data["highTemperature"] = cc.highTemperature; }
+            if(cc.lowTemperature != null) { cc_data["lowTemperature"] = cc.lowTemperature; }
+            if(cc.precipitationChance != null) { cc_data["precipitationChance"] = cc.precipitationChance; }
+            if(cc.relativeHumidity != null) { cc_data["relativeHumidity"] = cc.relativeHumidity; }
+            if(cc.temperature != null) { cc_data["temperature"] = cc.temperature; }
+            if(cc.feelsLikeTemperature != null) { cc_data["feelsLikeTemperature"] = cc.feelsLikeTemperature; }
+            if(cc.windBearing != null) { cc_data["windBearing"] = cc.windBearing; }
+            if(cc.windSpeed != null) { cc_data["windSpeed"] = cc.windSpeed; }
+        }
+
+        var hf = Weather.getHourlyForecast();
+        var hf_data = [];
+        if(hf != null) {
+            for(var i=0; i<hf.size(); i++) {
+                hf_data.add({
+                    "forecastTime" => hf[i].forecastTime.value(),
+                    "condition" => hf[i].condition,
+                    "precipitationChance" => hf[i].precipitationChance,
+                    "temperature" => hf[i].temperature,
+                    "windBearing" => hf[i].windBearing,
+                    "windSpeed" => hf[i].windSpeed
+                });
+            }
+        }
+
+        Application.Storage.setValue("current_conditions", cc_data);
+        Application.Storage.setValue("hourly_forecast", hf_data);
+    }
+
+    hidden function readWeatherData() as StoredWeather {
+        var ret = new StoredWeather();
+        var now = Time.now().value();
+        var cc_data = Application.Storage.getValue("current_conditions") as Dictionary<String, Application.PropertyValueType>?;
+        if(cc_data == null) { return ret; }
+        
+        var data_age_s = now - (cc_data.get("timestamp") as Number);
+        var pos = cc_data.get("observationLocationPosition") as Array;
+        ret.observationLocationPosition = new Position.Location({:latitude => pos[0], :longitude => pos[1], :format => :degrees});
+        if(data_age_s > 0 and data_age_s < 3600) {
+            ret.condition = cc_data.get("condition") as Number;
+            ret.highTemperature = cc_data.get("highTemperature") as Number;
+            ret.lowTemperature = cc_data.get("lowTemperature") as Number;
+            ret.precipitationChance = cc_data.get("precipitationChance") as Number;
+            ret.relativeHumidity = cc_data.get("relativeHumidity") as Number;
+            ret.temperature = cc_data.get("temperature") as Number;
+            ret.feelsLikeTemperature = cc_data.get("feelsLikeTemperature") as Float;
+            ret.windBearing = cc_data.get("windBearing") as Number;
+            ret.windSpeed = cc_data.get("windSpeed") as Float;
+        } else {
+            var hf_data = Application.Storage.getValue("hourly_forecast") as Array?;
+            if(hf_data == null) { return ret; }
+            for(var i=0; i<hf_data.size(); i++) {
+                var forecast_age = now - (hf_data[i].get("forecastTime") as Number);
+                if(forecast_age > 0 and forecast_age < 3600) {
+                    ret.condition = hf_data[i].get("condition") as Number;
+                    ret.temperature = hf_data[i].get("temperature") as Number;
+                    ret.precipitationChance = hf_data[i].get("precipitationChance") as Number;
+                    ret.windBearing = hf_data[i].get("windBearing") as Number;
+                    ret.windSpeed = hf_data[i].get("windSpeed") as Float;
+                }
+            }
+        }
+        
+        return ret;
     }
 
     hidden function getBatteryBars() as String {
@@ -2721,4 +2799,17 @@ class Segment34Delegate extends WatchUi.WatchFaceDelegate {
         }
     }
 
+}
+
+class StoredWeather {
+    public var observationLocationPosition as Position.Location or Null;
+    public var precipitationChance as Lang.Number or Null;
+    public var temperature as Lang.Numeric or Null;
+    public var windBearing as Lang.Number or Null;
+    public var windSpeed as Lang.Float or Null;
+    public var highTemperature as Lang.Numeric or Null;
+    public var lowTemperature as Lang.Numeric or Null;
+    public var feelsLikeTemperature as Lang.Float or Null;
+    public var relativeHumidity as Lang.Number or Null;
+    public var condition as Lang.Number or Null;
 }
