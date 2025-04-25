@@ -1951,6 +1951,12 @@ class Segment34View extends WatchUi.WatchFace {
             var humidity = getHumidity();
             var precip = getPrecip();
             val = join([temp, wind, humidity, precip]);
+        } else if(complicationType == 64) { // Condensed weather conditions
+            val = getWeatherConditionCondensed();
+        } else if(complicationType == 65) { // Condensed weather conditions + temp
+            var cond = getWeatherConditionCondensed();
+            var temp = getTemperature();
+            val = Lang.format("$1$ $2$", [cond, temp]);
         }
 
         return val;
@@ -2356,6 +2362,67 @@ class Segment34View extends WatchUi.WatchFace {
         ];
 
         return weatherNames[weatherCondition.condition] + perp;
+    }
+
+    hidden function getWeatherConditionCondensed() as String {
+        var weatherNames = [
+            "CLEAR",
+            "CLOUDY",
+            "CLOUDY",
+            "RAIN",
+            "SNOW",
+            "WINDY",
+            "THUNDER",
+            "WINTRY",
+            "FOG",
+            "HAZY",
+            "HAIL",
+            "SHOWERS",
+            "THUNDER",
+            "UNKNOWN",
+            "RAIN",
+            "HVY RAIN",
+            "SNOW",
+            "HVY SNOW",
+            "RAIN SNOW",
+            "RAIN SNOW",
+            "CLOUDY",
+            "RAIN SNOW",
+            "CLEAR",
+            "CLEAR",
+            "SHOWERS",
+            "SHOWERS",
+            "SHOWERS",
+            "(SHOWERS)",
+            "(THUNDER)",
+            "MIST",
+            "DUST",
+            "DRIZZLE",
+            "TORNADO",
+            "SMOKE",
+            "ICE",
+            "SAND",
+            "SQUALL",
+            "SANDSTORM",
+            "VOLC ASH",
+            "HAZE",
+            "FAIR",
+            "HURRICANE",
+            "TROP STORM",
+            "(SNOW)",
+            "(RAIN SNOW)",
+            "(RAIN)",
+            "(SNOW)",
+            "(RAIN SNOW)",
+            "FLURRIES",
+            "RAIN",
+            "SLEET",
+            "ICE SNOW",
+            "CLOUDY",
+            "UNKNOWN"
+        ];
+
+        return weatherNames[weatherCondition.condition];
     }
 
     hidden function getTemperature() as String {

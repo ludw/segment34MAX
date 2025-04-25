@@ -253,6 +253,8 @@
             <listEntry value="52">Temperature, Percipitation chance, High/Low</listEntry>
             <listEntry value="20">Weather conditions, Precipitation chance</listEntry>
             <listEntry value="50">Weather conditions</listEntry>
+            <listEntry value="64">Weather conditions (condensed)</listEntry>
+            <listEntry value="65">Weather conditions (condensed) + Temperature</listEntry>
             <listEntry value="43">Daily high temperature</listEntry>
             <listEntry value="44">Daily low temperature</listEntry>
             <listEntry value="53">Temperature</listEntry>
@@ -286,6 +288,8 @@
             <listEntry value="52">Temperature, Percipitation chance, High/Low</listEntry>
             <listEntry value="20">Weather conditions + Percipitation chance</listEntry>
             <listEntry value="50">Weather conditions</listEntry>
+            <listEntry value="64">Weather conditions (condensed)</listEntry>
+            <listEntry value="65">Weather conditions (condensed) + Temperature</listEntry>
             <listEntry value="43">Daily high temperature</listEntry>
             <listEntry value="44">Daily low temperature</listEntry>
             <listEntry value="53">Temperature</listEntry>
@@ -319,6 +323,8 @@
             <listEntry value="52">Temperature, Percipitation chance, High/Low</listEntry>
             <listEntry value="20">Weather conditions + Percipitation chance</listEntry>
             <listEntry value="50">Weather conditions</listEntry>
+            <listEntry value="64">Weather conditions (condensed)</listEntry>
+            <listEntry value="65">Weather conditions (condensed) + Temperature</listEntry>
             <listEntry value="17">Steps / day</listEntry>
             <listEntry value="19">Wheelchair pushes / day</listEntry>
             <listEntry value="11">Calories (kcal) / day</listEntry>
