@@ -1957,8 +1957,38 @@ class Segment34View extends WatchUi.WatchFace {
             var cond = getWeatherConditionCondensed();
             var temp = getTemperature();
             val = Lang.format("$1$ $2$", [cond, temp]);
+        } else if(complicationType == 66) { // Percipitation chance, High/Low
+            var precip = getPrecip();
+            var highlow = getHighLow();
+            val = join([precip, highlow]);
+        } else if(complicationType == 67) { // Wind, Humidity, Precipitation chance
+            var humidity = getHumidity();
+            var wind = getWind();
+            var precip = getPrecip();
+            val = join([humidity, wind, precip]);
+        } else if(complicationType == 68) { // Feels like, Wind, Precipitation chance
+            var feelsLike = getFeelsLike();
+            var wind = getWind();
+            var precip = getPrecip();
+            val = join([feelsLike, wind, precip]);
+        } else if(complicationType == 69) { // Humidity, High/low
+            var humidity = getHumidity();
+            var highlow = getHighLow();
+            val = join([humidity, highlow]);
         }
 
+/*
+var temp = getTemperature();
+            var humidity = getHumidity();
+            var highlow = getHighLow();
+            val = join([temp, humidity, highlow]);
+        } else if(complicationType == 52) { // Temperature, Percipitation chance, High/Low
+            var temp = getTemperature();
+            var precip = getPrecip();
+            <listEntry value="66">Percipitation chance, High/Low</listEntry>
+            <listEntry value="67">Wind, Humidity, Precipitation chance</listEntry>
+            <listEntry value="68">Feels like, Wind, Precipitation chance</listEntry>
+*/
         return val;
     }
 
@@ -2198,7 +2228,7 @@ class Segment34View extends WatchUi.WatchFace {
             if(ret.equals("")) {
                 ret = array[i];
             } else {
-                ret = ret + ", " + array[i];
+                ret = ret + " " + array[i];
             }
         }
         return ret;
@@ -2520,7 +2550,7 @@ class Segment34View extends WatchUi.WatchFace {
         var tempUnit = getTempUnit();
         if(weatherCondition != null and weatherCondition.feelsLikeTemperature != null) {
             var fltemp = formatTemperatureFloat(weatherCondition.feelsLikeTemperature, tempUnit);
-            fl = Lang.format("FL:$1$$2$", [fltemp.format("%d"), tempUnit]);
+            fl = Lang.format("($1$$2$)", [fltemp.format("%d"), tempUnit]);
         }
 
         return fl;
@@ -2541,7 +2571,7 @@ class Segment34View extends WatchUi.WatchFace {
                 var tempUnit = getTempUnit();
                 var high = formatTemperature(weatherCondition.highTemperature, tempUnit);
                 var low = formatTemperature(weatherCondition.lowTemperature, tempUnit);
-                ret = Lang.format("$1$$2$/$3$$2$", [high.format("%d"), tempUnit, low.format("%d")]);
+                ret = Lang.format("$1$/$3$$2$", [high.format("%d"), tempUnit, low.format("%d")]);
             }
         }
         return ret;
