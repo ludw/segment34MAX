@@ -1973,20 +1973,10 @@ class Segment34View extends WatchUi.WatchFace {
             var humidity = getHumidity();
             var highlow = getHighLow();
             val = join([humidity, highlow]);
+        } else if(complicationType == 70) { // UV Index
+            val = getUVIndex();
         }
 
-/*
-var temp = getTemperature();
-            var humidity = getHumidity();
-            var highlow = getHighLow();
-            val = join([temp, humidity, highlow]);
-        } else if(complicationType == 52) { // Temperature, Percipitation chance, High/Low
-            var temp = getTemperature();
-            var precip = getPrecip();
-            <listEntry value="66">Percipitation chance, High/Low</listEntry>
-            <listEntry value="67">Wind, Humidity, Precipitation chance</listEntry>
-            <listEntry value="68">Feels like, Wind, Precipitation chance</listEntry>
-*/
         return val;
     }
 
@@ -2123,6 +2113,7 @@ var temp = getTemperature();
             case 57: return formatLabel("CAL", "NEXT CAL", labelSize);
             case 59: return formatLabel("OX", "PULSE OX", labelSize);
             case 62: return formatLabel("ACC", "POS ACC", labelSize);
+            case 70: return formatLabel("UV", "UV INDEX", labelSize);
         }
         
         return "";
@@ -2558,6 +2549,14 @@ var temp = getTemperature();
         var ret = "";
         if(weatherCondition != null and weatherCondition.relativeHumidity != null) {
             ret = Lang.format("$1$%", [weatherCondition.relativeHumidity]);
+        }
+        return ret;
+    }
+
+    hidden function getUVIndex() as String {
+        var ret = "";
+        if(weatherCondition != null and weatherCondition has :uvIndex and weatherCondition.uvIndex != null) {
+            ret = weatherCondition.uvIndex.format("%d");
         }
         return ret;
     }

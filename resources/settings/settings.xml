@@ -176,6 +176,7 @@
             <listEntry value="44">Weather: Daily low temperature</listEntry>
             <listEntry value="53">Weather: Temperature</listEntry>
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
     </setting>
@@ -227,6 +228,7 @@
             <listEntry value="44">Weather: Daily low temperature</listEntry>
             <listEntry value="53">Weather: Temperature</listEntry>
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
     </setting>
@@ -428,6 +430,7 @@
             <listEntry value="44">Weather: Daily low temperature</listEntry>
             <listEntry value="53">Weather: Temperature</listEntry>
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
             <listEntry value="62">Current Location Accuracy</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
@@ -481,6 +484,7 @@
             <listEntry value="44">Weather: Daily low temperature</listEntry>
             <listEntry value="53">Weather: Temperature</listEntry>
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
             <listEntry value="62">Current Location Accuracy</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
@@ -534,6 +538,7 @@
             <listEntry value="44">Weather: Daily low temperature</listEntry>
             <listEntry value="53">Weather: Temperature</listEntry>
             <listEntry value="54">Weather: Chance of Precipitation</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
             <listEntry value="62">Current Location Accuracy</listEntry>
             <listEntry value="57">Next calendar event time</listEntry>
         </settingConfig>
