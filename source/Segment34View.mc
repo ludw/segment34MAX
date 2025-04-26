@@ -1981,6 +1981,17 @@ class Segment34View extends WatchUi.WatchFace {
             val = join([humidity, highlow]);
         } else if(complicationType == 70) { // UV Index
             val = getUVIndex();
+        } else if(complicationType == 71) { // Temperature, High/Low
+            var temp = getTemperature();
+            var highlow = getHighLow();
+            val = join([temp, highlow]);
+        } else if(complicationType == 72) { // Temperature, UV Index, High/Low
+            var temp = getTemperature();
+            var uv = getUVIndex();
+            var highlow = getHighLow();
+            val = join([temp, uv, highlow]);
+        } else if(complicationType == 73) { // Humidity
+            val = getHumidity();
         }
 
         return val;
@@ -2120,6 +2131,7 @@ class Segment34View extends WatchUi.WatchFace {
             case 59: return formatLabel("OX", "PULSE OX", labelSize);
             case 62: return formatLabel("ACC", "POS ACC", labelSize);
             case 70: return formatLabel("UV", "UV INDEX", labelSize);
+            case 73: return formatLabel("HUM", "HUMIDITY", labelSize);
         }
         
         return "";

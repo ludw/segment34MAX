@@ -56,10 +56,12 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
-2025-04-25 v 1.2.1
+2025-04-26 v 1.3.0
 - Clip issue for seconds on MIP
+- Added UV Index as option
 
-2025-04-25 v 1.2.0
+
+2025-04-26 v 1.2.0
 - More compact weather data to avoid overflow
 - More choices for text lines
 
