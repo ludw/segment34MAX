@@ -1482,8 +1482,6 @@ class Segment34View extends WatchUi.WatchFace {
             unit = "PUSHES";
         } else if(complicationType == 29) { // Active calories / day
             unit = "KCAL";
-        } else if(complicationType == 58) { // Active/Total calories / day
-            unit = "KCAL";
         }
         return unit;
     }
@@ -1729,9 +1727,9 @@ class Segment34View extends WatchUi.WatchFace {
         } else if(complicationType == 29) { // Act Calories
             var rest_calories = getRestCalories();
             // Get total calories and subtract rest calories
-            if (ActivityMonitor.getInfo() has :calories && ActivityMonitor.getInfo().calories != null && rest_calories > 0) {
+            if (ActivityMonitor.getInfo() has :calories && ActivityMonitor.getInfo().calories != null && rest_calories >= 0) {
                 var active_calories = ActivityMonitor.getInfo().calories - rest_calories;
-                if (active_calories > 0) {
+                if (active_calories >= 0) {
                     val = active_calories.format(numberFormat);
                 }
             }
