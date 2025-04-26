@@ -55,6 +55,9 @@ Pull requests are welcome, but please follow the following guidelines:
 - Monthly run/bike distance
 
 ## Change log
+2025-04-25 v 1.2.1
+- Clip issue for seconds on MIP
+
 2025-04-25 v 1.2.0
 - More compact weather data to avoid overflow
 - More choices for text lines

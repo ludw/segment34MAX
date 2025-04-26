@@ -539,7 +539,7 @@ class Segment34View extends WatchUi.WatchFace {
 
         updateSeconds(now);
         
-        dc.setClip(baseX + halfClockWidth - textSideAdj - clipWidth, y1, clipWidth, smallDataHeight);
+        dc.setClip(baseX + halfClockWidth - textSideAdj - clipWidth, y1, clipWidth, smallDataHeight+1);
         dc.setColor(themeColors[bg], themeColors[bg]);
         dc.clear();
 
