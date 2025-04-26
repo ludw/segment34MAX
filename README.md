@@ -54,6 +54,7 @@ Pull requests are welcome, but please follow the following guidelines:
 - Weather caching
 - Monthly run/bike distance
 
+
 ## Change log
 2025-04-25 v 1.2.1
 - Clip issue for seconds on MIP

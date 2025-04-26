@@ -1393,20 +1393,24 @@ class Segment34View extends WatchUi.WatchFace {
             if(cc.feelsLikeTemperature != null) { cc_data["feelsLikeTemperature"] = cc.feelsLikeTemperature; }
             if(cc.windBearing != null) { cc_data["windBearing"] = cc.windBearing; }
             if(cc.windSpeed != null) { cc_data["windSpeed"] = cc.windSpeed; }
+            if(cc has :uvIndex and cc.uvIndex != null) { cc_data["uvIndex"] = cc.uvIndex; }
         }
 
         var hf = Weather.getHourlyForecast();
         var hf_data = [];
+        var tmp = {};
         if(hf != null) {
             for(var i=0; i<hf.size(); i++) {
-                hf_data.add({
+                tmp = {
                     "forecastTime" => hf[i].forecastTime.value(),
                     "condition" => hf[i].condition,
                     "precipitationChance" => hf[i].precipitationChance,
                     "temperature" => hf[i].temperature,
                     "windBearing" => hf[i].windBearing,
                     "windSpeed" => hf[i].windSpeed
-                });
+                };
+                if(hf[i] has :uvIndex) { tmp["uvIndex"] = hf[i].uvIndex; }
+                hf_data.add(tmp);
             }
         }
 
@@ -1433,6 +1437,7 @@ class Segment34View extends WatchUi.WatchFace {
             ret.feelsLikeTemperature = cc_data.get("feelsLikeTemperature") as Float;
             ret.windBearing = cc_data.get("windBearing") as Number;
             ret.windSpeed = cc_data.get("windSpeed") as Float;
+            ret.uvIndex = cc_data.get("uvIndex") as Float;
         } else {
             var hf_data = Application.Storage.getValue("hourly_forecast") as Array?;
             if(hf_data == null) { return ret; }
@@ -1444,6 +1449,7 @@ class Segment34View extends WatchUi.WatchFace {
                     ret.precipitationChance = hf_data[i].get("precipitationChance") as Number;
                     ret.windBearing = hf_data[i].get("windBearing") as Number;
                     ret.windSpeed = hf_data[i].get("windSpeed") as Float;
+                    ret.uvIndex = cc_data.get("uvIndex") as Float;
                 }
             }
         }
@@ -2384,6 +2390,11 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     hidden function getWeatherConditionCondensed() as String {
+        // Early return if no weather data
+        if (weatherCondition == null || weatherCondition.condition == null) {
+            return "";
+        }
+
         var weatherNames = [
             "CLEAR",
             "CLOUDY",
@@ -2906,4 +2917,5 @@ class StoredWeather {
     public var feelsLikeTemperature as Lang.Float or Null;
     public var relativeHumidity as Lang.Number or Null;
     public var condition as Lang.Number or Null;
+    public var uvIndex as Lang.Float or Null;
 }
