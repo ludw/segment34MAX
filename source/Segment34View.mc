@@ -445,7 +445,7 @@ class Segment34View extends WatchUi.WatchFace {
         clockHeight = 145;
         clockWidth = 413;
         labelHeight = 13;
-        labelMargin = 5;
+        labelMargin = 8;
         tinyDataHeight = 13;
         smallDataHeight = 27;
         largeDataHeight = 40;
@@ -455,7 +455,7 @@ class Segment34View extends WatchUi.WatchFace {
         fieldSpaceingAdj = 20;
         textSideAdj = 4;
         barBottomAdj = 2;
-        marginY = 13;
+        marginY = 15;
         histogramHeight = 35;
         histogramTargetWidth = 45;
     }
