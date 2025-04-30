@@ -56,6 +56,9 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
+2025-04-30 v 1.3.1
+- Minor layout adjustments on some watches
+
 2025-04-26 v 1.3.0
 - Clip issue for seconds on MIP
 - Added UV Index as option
