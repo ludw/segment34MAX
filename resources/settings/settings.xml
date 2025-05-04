@@ -242,7 +242,7 @@
                 <listEntry value="2">Lines (highest contrast)</listEntry>
             </settingConfig>
     </setting>
-
+    
     <setting propertyKey="@Properties.weatherLine1Shows" title="Line 1 above clock (not on all watches):">
         <settingConfig type="list">
             <listEntry value="-2">Hidden</listEntry>
@@ -387,7 +387,16 @@
             <listEntry value="7">5, 3</listEntry>
             <listEntry value="8">3, 5</listEntry>
             <listEntry value="9">5</listEntry>
+            <listEntry value="10">4, 3, 4</listEntry>
+            <listEntry value="11">3, 5, 3</listEntry>
         </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.bottomFieldFontSize" title="Bottom field font size:">
+            <settingConfig type="list">
+                <listEntry value="0">Large font size</listEntry>
+                <listEntry value="1">Smaller font size</listEntry>
+            </settingConfig>
     </setting>
 
     <setting propertyKey="@Properties.leftValueShows" title="Bottom value 1 (left):">

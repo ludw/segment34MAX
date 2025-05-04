@@ -56,6 +56,9 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
+2025-05-04 v 1.4.0
+- Option for smaller font size on bottom fields
+
 2025-04-30 v 1.3.1
 - Minor layout adjustments on some watches
 
