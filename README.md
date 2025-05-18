@@ -56,6 +56,9 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
+2025-05-18 v 1.5.0
+- Custom themes replaced with a online theme designer, all colors can now be customized. If you have usef custom color themes 1-4 you must unfortunately recreate the theme you want at https://ludw.github.io/designer and then copy over the color codes to the watchface settings after you have updated.
+
 2025-05-04 v 1.4.0
 - Option for smaller font size on bottom fields
 
