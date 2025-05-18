@@ -329,11 +329,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
-        if(themeColors[bg] == 0x000000) {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        } else {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient2) as BitmapResource;
-        }
+        drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
@@ -370,11 +366,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
-        if(themeColors[bg] == 0x000000) {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        } else {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient2) as BitmapResource;
-        }
+        drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
@@ -410,11 +402,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
-        if(themeColors[bg] == 0x000000) {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        } else {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient2) as BitmapResource;
-        }
+        drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 125;
@@ -448,11 +436,7 @@ class Segment34View extends WatchUi.WatchFace {
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
-        if(themeColors[bg] == 0x000000) {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
-        } else {
-             drawGradient = Application.loadResource(Rez.Drawables.gradient2) as BitmapResource;
-        }
+        drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
 
         clockHeight = 145;
@@ -620,8 +604,6 @@ class Segment34View extends WatchUi.WatchFace {
         // Draw clock gradient
         if(drawGradient != null and themeColors[bg] == 0x000000) {
             dc.drawBitmap(centerX - halfClockWidth, baseY - halfClockHeight, drawGradient);
-        } else if (drawGradient != null and dc has :drawBitmap2) {
-            dc.drawBitmap2(centerX - halfClockWidth, baseY - halfClockHeight, drawGradient, {:tintColor => themeColors[bg]});
         }
 
         if(propClockOutlineStyle == 2 or propClockOutlineStyle == 3) {
@@ -723,7 +705,7 @@ class Segment34View extends WatchUi.WatchFace {
 
         // Draw clock gradient
         dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), baseY - halfClockHeight, drawAODPattern);
-        dc.drawBitmap(centerX - halfClockWidth - (now.min % 2), baseY - halfClockHeight, drawGradient);
+        dc.drawBitmap(centerX - halfClockWidth, baseY - halfClockHeight, drawGradient);
 
         // Draw Line below clock
         var y1 = baseY + halfClockHeight + marginY;
