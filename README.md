@@ -56,6 +56,9 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
+2025-05-21 v1.5.2
+- Fixed issue with weather not always updating properly
+
 2025-05-18 v1.5.1
 - Added support for Descent G2
 
