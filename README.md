@@ -56,8 +56,13 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
-2025-05-21 v1.5.2
+2025-05-29 v1.6.1
+- Support for fr570
+- Fixed bug with press to toggle night theme
+
+2025-05-21 v1.6.0
 - Fixed issue with weather not always updating properly
+- Support for Fr970
 
 2025-05-18 v1.5.1
 - Added support for Descent G2
