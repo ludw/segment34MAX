@@ -53,9 +53,13 @@ Pull requests are welcome, but please follow the following guidelines:
 - Race predictions
 - Weather caching
 - Monthly run/bike distance
+- Font options for bottom fields as well (lines, blended, dots)
 
 
 ## Change log
+2025-06-08 v1.7.0
+- Fixed crash
+
 2025-05-29 v1.6.1
 - Support for fr570
 - Fixed bug with press to toggle night theme
