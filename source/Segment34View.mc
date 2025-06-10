@@ -1710,7 +1710,7 @@ class Segment34View extends WatchUi.WatchFace {
             if(weatherCondition != null) {
                 var loc = weatherCondition.observationLocationPosition;
                 if(loc != null) {
-                    var s = Weather.getSunrise(loc, now);
+                    var s = Weather.getSunset(loc, now);
                     if(s != null) {
                         var sunset = Time.Gregorian.info(s, Time.FORMAT_SHORT);
                         var sunsetHour = formatHour(sunset.hour);

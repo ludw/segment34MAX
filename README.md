@@ -57,7 +57,10 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
-2025-06-08 v1.7.0
+2025-06-10 v1.6.3
+- Fixed issue with sunset
+
+2025-06-08 v1.6.2
 - Fixed crash
 
 2025-05-29 v1.6.1
