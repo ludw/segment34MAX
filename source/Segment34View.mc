@@ -223,10 +223,10 @@ class Segment34View extends WatchUi.WatchFace {
         fontTinyDataPlus = Application.loadResource(Rez.Fonts.led_small_lines);
         if(propSmallFontVariant == 0) { fontSmallData = Application.loadResource(Rez.Fonts.led_small); }
         if(propSmallFontVariant == 1) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_readable); }
-        if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_small_lines); }
+        if(propSmallFontVariant == 2) { fontSmallData = fontTinyDataPlus; }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_small); }
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = fontTinyData;
         fontBattery = Application.loadResource(Rez.Fonts.smol);
 
         clockHeight = 80;
@@ -259,7 +259,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_small); }
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = fontTinyData;
         fontBattery = Application.loadResource(Rez.Fonts.smol);
 
         clockHeight = 80;
@@ -292,7 +292,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led);
         fontBattery = Application.loadResource(Rez.Fonts.smol);
 
@@ -327,7 +327,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
-        fontLabel = Application.loadResource(Rez.Fonts.storre);
+        fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
@@ -364,7 +364,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led_bigger); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
-        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
@@ -400,7 +400,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led_bigger); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
-        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
@@ -434,7 +434,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propSmallFontVariant == 2) { fontSmallData = Application.loadResource(Rez.Fonts.led_big_lines); }
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led_bigger); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
-        fontLabel = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
         fontBattery = fontTinyData;
 
