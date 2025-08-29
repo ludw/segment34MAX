@@ -576,6 +576,14 @@
                 <listEntry value="5">Move Bar</listEntry>
             </settingConfig>
     </setting>
+    
+    <setting propertyKey="@Properties.aodStyle" title="AOD Style">
+        <settingConfig type="list">
+            <listEntry value="0">Disabled (also disable in watch settings for best battery life)</listEntry>
+            <listEntry value="1">Clock + two fields (defined below)</listEntry>
+            <listEntry value="2">Full watchface (uses most battery)</listEntry>
+        </settingConfig>
+    </setting>
 
     <setting propertyKey="@Properties.aodFieldShows" title="Always On (below clock):">
         <settingConfig type="list">

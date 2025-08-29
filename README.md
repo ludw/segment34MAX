@@ -54,6 +54,7 @@ Pull requests are welcome, but please follow the following guidelines:
 - Weather caching
 - Monthly run/bike distance
 - Font options for bottom fields as well (lines, blended, dots)
+- Compass bearing
 
 
 ## Change log
