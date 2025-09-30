@@ -58,6 +58,15 @@ Pull requests are welcome, but please follow the following guidelines:
 
 
 ## Change log
+2025-09-30 v1.7.2
+- Support for Venu 4
+
+2025-09-12 v1.7.1
+- Support for Fenix 8 Pro
+
+2025-09-01 v1.7.0
+- AOD mode that shows all the fields (must be enabled in settings)
+
 2025-06-10 v1.6.3
 - Fixed issue with sunset
 
