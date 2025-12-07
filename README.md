@@ -1,7 +1,5 @@
-# Segment34 MkII
+# Segment34 MAX
 A watchface for Garmin watches with a 34 Segment display
-
-![Screenshot of the watchface](screenshot.png "Screenshot")
 
 The watchface features the following:
 
@@ -23,7 +21,7 @@ The watchface features the following:
 https://github.com/ludw/Segment34mkII/blob/main/FAQ.md
 
 ## IQ Store Listing
-https://apps.garmin.com/apps/aa85d03d-ab89-4e06-b8c6-71a014198593
+https://apps.garmin.com/apps/3261679c-602d-457d-81a2-27e3c39ad5c3
 
 ## Buy me a coffee (if you want to)
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M51A1RGV)
