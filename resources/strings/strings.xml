@@ -1,3 +1,5 @@
 <strings>
     <string id="AppName">Segment34 MAX</string>
+    <string id="settings_cgm_glucose_trend">CGM Glucose + Trend</string>
+    <string id="settings_cgm_age">CGM Age (minutes)</string>
 </strings>

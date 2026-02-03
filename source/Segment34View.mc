@@ -95,7 +95,11 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var lastSlowUpdate as Number? = null;
     hidden var doesPartialUpdate as Boolean = false;
     hidden var hasComplications as Boolean = false;
-    
+
+    // CGM Connect Widget complication IDs
+    hidden var cgmComplicationId as Complications.Id? = null;
+    hidden var cgmAgeComplicationId as Complications.Id? = null;
+
     hidden var propIs24H as Boolean = false;
     hidden var propTheme as Integer = 0;
     hidden var propNightTheme as Integer = -1;
@@ -1943,6 +1947,10 @@ class Segment34View extends WatchUi.WatchFace {
             val = join([temp, uv, highlow]);
         } else if(complicationType == 73) { // Humidity
             val = getHumidity();
+        } else if(complicationType == 74) { // CGM Glucose + Trend
+            val = getCgmReading();
+        } else if(complicationType == 75) { // CGM Age (minutes)
+            val = getCgmAge();
         }
 
         return val;
@@ -2085,8 +2093,10 @@ class Segment34View extends WatchUi.WatchFace {
             case 62: return formatLabel("ACC", "POS ACC", labelSize);
             case 70: return formatLabel("UV", "UV INDEX", labelSize);
             case 73: return formatLabel("HUM", "HUMIDITY", labelSize);
+            case 74: return "CGM:";
+            case 75: return formatLabel("AGE", "CGM AGE", labelSize);
         }
-        
+
         return "";
     }
 
@@ -2757,6 +2767,80 @@ class Segment34View extends WatchUi.WatchFace {
 
     hidden function rgbToDec( rr, gg, bb ) as Graphics.ColorType {
         return rr*65536 + gg*256 + bb;
+    }
+
+    // CGM Connect Widget helper functions
+    hidden function getCgmComplicationByLabel(targetLabel as String) as Complications.Id? {
+        if (!hasComplications) { return null; }
+        try {
+            var iter = Complications.getComplications();
+            if (iter == null) { return null; }
+            var comp = iter.next();
+            while (comp != null) {
+                var compType = comp.getType();
+                var compLabel = comp.shortLabel;
+                if (compType == Complications.COMPLICATION_TYPE_INVALID && compLabel != null) {
+                    if (compLabel.equals(targetLabel)) {
+                        Complications.subscribeToUpdates(comp.complicationId);
+                        return comp.complicationId;
+                    }
+                }
+                comp = iter.next();
+            }
+        } catch (e) {}
+        return null;
+    }
+
+    hidden function convertCgmTrendToArrow(trend as String) as String {
+        if (trend.equals("R")) { return "a"; }  // Rapidly rising ↑
+        if (trend.equals("r")) { return "b"; }  // Rising ↗
+        if (trend.equals("n")) { return "c"; }  // Neutral →
+        if (trend.equals("d")) { return "d"; }  // Falling ↘
+        if (trend.equals("D")) { return "e"; }  // Rapidly falling ↓
+        return "";
+    }
+
+    hidden function getCgmReading() as String {
+        if (!hasComplications) { return ""; }
+        try {
+            if (cgmComplicationId == null) {
+                cgmComplicationId = getCgmComplicationByLabel("CGM");
+            }
+            if (cgmComplicationId == null) { return ""; }
+
+            var comp = Complications.getComplication(cgmComplicationId);
+            if (comp == null || comp.value == null) { return ""; }
+
+            var valueStr = comp.value.toString();
+            if (valueStr.equals("---")) { return "---"; }
+
+            var spaceIndex = valueStr.find(" ");
+            if (spaceIndex == null) { return valueStr; }
+
+            var reading = valueStr.substring(0, spaceIndex);
+            var trend = valueStr.substring(spaceIndex + 1, valueStr.length());
+            var arrow = convertCgmTrendToArrow(trend);
+            return reading + arrow;
+        } catch (e) {}
+        return "";
+    }
+
+    hidden function getCgmAge() as String {
+        if (!hasComplications) { return ""; }
+        try {
+            if (cgmAgeComplicationId == null) {
+                cgmAgeComplicationId = getCgmComplicationByLabel("CGM Age");
+            }
+            if (cgmAgeComplicationId == null) { return ""; }
+            var comp = Complications.getComplication(cgmAgeComplicationId);
+            if (comp == null || comp.value == null) { return ""; }
+            var timestamp = comp.value.toString().toLong();
+            if (timestamp == null || timestamp < 0) { return "---"; }
+            var ageMin = (Time.now().value() - timestamp) / 60;
+            if (ageMin < 0) { return "---"; }
+            return ageMin.format("%d");
+        } catch (e) {}
+        return "";
     }
 
 }
