@@ -771,8 +771,10 @@ class Segment34View extends WatchUi.WatchFace {
             return [5, 0, 0];
         } else if(propFieldLayout == 10) {
             return [4, 3, 4];
-        } else {
+        } else if(propFieldLayout == 11) {
             return [3, 5, 3];
+        } else {
+            return [3, 2, 3];
         } 
     }
 
@@ -1482,7 +1484,7 @@ class Segment34View extends WatchUi.WatchFace {
                     var complication = Complications.getComplication(new Id(Complications.COMPLICATION_TYPE_RECOVERY_TIME));
                     if (complication != null && complication.value != null) {
                         var recovery_h = complication.value / 60.0;
-                        if(recovery_h < 10 and recovery_h != 0) { val = recovery_h.format("%.1f"); } else { val = recovery_h.format(numberFormat); }
+                        if(recovery_h < 10 and recovery_h != 0 and width >= 3) { val = recovery_h.format("%.1f"); } else { val = recovery_h.format(numberFormat); }
                     }
                 } catch(e) {}
             } else {
@@ -1654,7 +1656,7 @@ class Segment34View extends WatchUi.WatchFace {
             if(profile has :weight) {
                 if(profile.weight != null) {
                     var weight_kg = profile.weight / 1000.0;
-                    if (width == 3) {
+                    if (width <= 3) {
                         val = weight_kg.format(numberFormat);
                     } else {
                         val = weight_kg.format("%.1f");

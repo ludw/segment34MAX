@@ -53,9 +53,15 @@ Pull requests are welcome, but please follow the following guidelines:
 - Monthly run/bike distance
 - Font options for bottom fields as well (lines, blended, dots)
 - Compass bearing
+- Larger battery indicator
+
 
 
 ## Change log
+2026-02-03 v1.8.0
+- Improvements when field width is 2
+- New field size option: 3, 2, 3
+
 2025-09-30 v1.7.2
 - Support for Venu 4
 
