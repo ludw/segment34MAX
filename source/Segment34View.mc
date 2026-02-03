@@ -95,6 +95,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var lastSlowUpdate as Number? = null;
     hidden var doesPartialUpdate as Boolean = false;
     hidden var hasComplications as Boolean = false;
+    hidden var isWeatherRequired as Boolean = false;
 
     // CGM Connect Widget complication IDs
     hidden var cgmComplicationId as Complications.Id? = null;
@@ -167,6 +168,7 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     const clockBgText = "#####";
+    const battFull as String = "||||||";
 
     (:Round240) const bottomFieldBg = "#";
     (:Round260) const bottomFieldBg = "#";
@@ -783,7 +785,7 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     hidden function drawDataField(dc as Dc, x as Number, y as Number, adjX as Number, label as String?, value as String, bgChar as String, width as Number, font as FontResource) as Number {
-        if(value.equals("") and (label == null or label.equals(""))) { return 0; }
+        if(value.length() == 0 and (label == null or label.length() == 0)) { return 0; }
         if(width == 0) { return 0; }
         var valueBg = "";
         for(var i=0; i<width; i++) { valueBg += bgChar; }
@@ -958,7 +960,7 @@ class Segment34View extends WatchUi.WatchFace {
 
     hidden function customColorTheme() as Array<Graphics.ColorType>{
         var ret = [];
-        if(propColorOverride.equals("")) { return setColorTheme(-1); }
+        if(propColorOverride.length() == 0) { return setColorTheme(-1); }
         var color_str = "";
         var color = null;
         for(var i=0; i<propColorOverride.length(); i += 8) {
@@ -1093,9 +1095,24 @@ class Segment34View extends WatchUi.WatchFace {
         propSmallFontVariant = Application.Properties.getValue("smallFontVariant") as Number;
         propBottomFieldFontSize = Application.Properties.getValue("bottomFieldFontSize") as Number;
         propIs24H = System.getDeviceSettings().is24Hour;
-        
+
         nightMode = null; // force update color theme
         updateColorTheme();
+
+        isWeatherRequired = false;
+        var weatherFields = [
+            propSunriseFieldShows, propSunsetFieldShows,
+            propWeatherLine1Shows, propWeatherLine2Shows,
+            propDateFieldShows,
+            propLeftValueShows, propMiddleValueShows, propRightValueShows,
+            propAodFieldShows, propAodRightFieldShows
+        ];
+        for(var i=0; i<weatherFields.size(); i++) {
+            if (isWeatherSource(weatherFields[i])) {
+                isWeatherRequired = true;
+                break;
+            }
+        }
     }
 
     hidden function updateData(now as Gregorian.Info) as Void {
@@ -1122,7 +1139,7 @@ class Segment34View extends WatchUi.WatchFace {
         dataLabelBottomMiddle = getLabelByType(propMiddleValueShows, fieldWidths[1] - 1);
         dataLabelBottomRight = getLabelByType(propRightValueShows, fieldWidths[2] - 1);
 
-        if(!infoMessage.equals("")) {
+        if(infoMessage.length() != 0) {
             dataBelow = infoMessage;
             infoMessage = "";
         }
@@ -1299,6 +1316,7 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     hidden function updateWeather() as Void {
+        if (!isWeatherRequired) { return; }
         if(!(Toybox has :Weather) or !(Weather has :getCurrentConditions)) { return; }
 
         if(Weather.getCurrentConditions() != null) {
@@ -1401,13 +1419,16 @@ class Segment34View extends WatchUi.WatchFace {
         return ret;
     }
 
-    hidden function getBatteryBars() as String {
-        var bat = Math.round(System.getSystemStats().battery / 100.0 * 6);
-        var value = "";
-        for(var i = 0; i < bat; i++) {
-            value += "|";
+    hidden function isWeatherSource(id as Number) as Boolean {
+        if (id == 39 || id == 40 || (id >= 43 && id <= 55) || (id >= 63 && id <= 73)) {
+            return true;
         }
-        return value;
+        return false;
+    }
+
+    hidden function getBatteryBars() as String {
+        var bat = Math.round(System.getSystemStats().battery / 100.0 * 6).toNumber();
+        return battFull.substring(0, bat);
     }
 
     hidden function getValueByTypeWithUnit(complicationType as Number, width as Number) as String {
@@ -2149,10 +2170,10 @@ class Segment34View extends WatchUi.WatchFace {
     hidden function join(array as Array<String>) as String {
         var ret = "";
         for(var i=0; i<array.size(); i++) {
-            if(array[i].equals("")) {
+            if(array[i].length() == 0) {
                 continue;
             }
-            if(ret.equals("")) {
+            if(ret.length() == 0) {
                 ret = array[i];
             } else {
                 ret = ret + " " + array[i];
