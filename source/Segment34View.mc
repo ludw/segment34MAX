@@ -168,7 +168,6 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     const clockBgText = "#####";
-    const battFull as String = "||||||";
 
     (:Round240) const bottomFieldBg = "#";
     (:Round260) const bottomFieldBg = "#";
@@ -233,7 +232,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_small); }
         fontLabel = fontTinyData;
-        fontBattery = Application.loadResource(Rez.Fonts.smol);
+        fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
         clockHeight = 80;
         clockWidth = 220;
@@ -266,7 +265,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 0) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_small); }
         fontLabel = fontTinyData;
-        fontBattery = Application.loadResource(Rez.Fonts.smol);
+        fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
         clockHeight = 80;
         clockWidth = 227;
@@ -300,7 +299,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led);
-        fontBattery = Application.loadResource(Rez.Fonts.smol);
+        fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
 
         clockHeight = 80;
         clockWidth = 236;
@@ -335,7 +334,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led); }
         fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
-        fontBattery = Application.loadResource(Rez.Fonts.led_small_lines);
+        fontBattery = Application.loadResource(Rez.Fonts.led_lines);
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
@@ -356,7 +355,6 @@ class Segment34View extends WatchUi.WatchFace {
         marginY = 10;
         histogramHeight = 20;
         histogramTargetWidth = 30;
-        
     }
 
     (:Round390)
@@ -372,7 +370,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
         fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
-        fontBattery = fontTinyData;
+        fontBattery = fontTinyDataPlus;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
@@ -408,7 +406,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
         fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
-        fontBattery = fontTinyData;
+        fontBattery = fontTinyDataPlus;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
@@ -442,7 +440,7 @@ class Segment34View extends WatchUi.WatchFace {
         if(propBottomFieldFontSize == 1) { fontLargeData = Application.loadResource(Rez.Fonts.led_big); }
         fontLabel = fontTinyData;
         fontAODData = Application.loadResource(Rez.Fonts.led_big);
-        fontBattery = fontTinyData;
+        fontBattery = fontTinyDataPlus;
 
         drawGradient = Application.loadResource(Rez.Drawables.gradient) as BitmapResource;
         drawAODPattern = Application.loadResource(Rez.Drawables.aod2) as BitmapResource;
@@ -680,9 +678,9 @@ class Segment34View extends WatchUi.WatchFace {
         
         // Draw the 5 digit bottom field
         var y4 = y3 + marginY;
-        var batt_width = 50;
+        var batt_width = 65;
         if(screenWidth <= 280) {
-            batt_width = 25;
+            batt_width = 50;
         }
 
         // Draw icons
@@ -691,7 +689,7 @@ class Segment34View extends WatchUi.WatchFace {
         dc.drawText(centerX + (batt_width / 2) + (marginX / 2) - 2, y4 + 10 + iconYAdj, fontIcons, dataIcon2, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         
         // Draw battery icon
-        drawBatteryIcon(dc, null, y4);
+        drawBatteryIcon(dc);
     }
 
     (:MIP)
@@ -859,11 +857,27 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     (:AMOLED)
-    hidden function drawBatteryIcon(dc as Dc, x as Number?, y as Number?) {
+    hidden function drawBatteryIcon(dc as Dc) {
         var visible = (!isSleeping) && propBatteryVariant != 2;  // Only show if not in AOD and battery is not hidden
         if(!visible) { return; }
-        if(x == null) { x = centerX; }
-        if(y == null) { y =  screenHeight - 25; }
+        var x = centerX;
+        var y = screenHeight - 30;
+
+        dc.setColor(0x555555, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(x, y, fontIcons, "T", Graphics.TEXT_JUSTIFY_CENTER);
+        if(System.getSystemStats().battery <= 15) {
+            dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+        } else {
+            dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
+        }
+        dc.drawText(x - 26, y + 4, fontBattery, dataBattery, Graphics.TEXT_JUSTIFY_LEFT);
+    }
+
+    (:MIP)
+    hidden function drawBatteryIcon(dc as Dc) {
+        if(propBatteryVariant == 2) { return; }
+        var x = centerX;
+        var y = screenHeight - 25;
 
         dc.setColor(0x555555, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x, y, fontIcons, "C", Graphics.TEXT_JUSTIFY_CENTER);
@@ -873,22 +887,6 @@ class Segment34View extends WatchUi.WatchFace {
             dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
         }
         dc.drawText(x - 19, y + 4, fontBattery, dataBattery, Graphics.TEXT_JUSTIFY_LEFT);
-    }
-
-    (:MIP)
-    hidden function drawBatteryIcon(dc as Dc, x as Number?, y as Number?) {
-        if(propBatteryVariant == 2) { return; }
-        if(x == null) { x = centerX; }
-        if(y == null) { y =  screenHeight - 18; }
-
-        dc.setColor(0x555555, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x, y, fontIcons, "B", Graphics.TEXT_JUSTIFY_CENTER);
-        if(System.getSystemStats().battery <= 15) {
-            dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
-        } else {
-            dc.setColor(themeColors[dataVal], Graphics.COLOR_TRANSPARENT);
-        }
-        dc.drawText(x - 10, y + 6, fontBattery, dataBattery, Graphics.TEXT_JUSTIFY_LEFT);
     }
 
     (:MIP)
@@ -1275,8 +1273,8 @@ class Segment34View extends WatchUi.WatchFace {
             var sample = 0;
             var max = 0;
             if(screenHeight > 280) {
-                sample = Math.round(System.getSystemStats().battery / 100.0 * 35);
-                max = 35;
+                sample = Math.round(System.getSystemStats().battery / 100.0 * 24);
+                max = 24;
             } else {
                 sample = Math.round(System.getSystemStats().battery / 100.0 * 20);
                 max = 20;
@@ -1424,11 +1422,6 @@ class Segment34View extends WatchUi.WatchFace {
             return true;
         }
         return false;
-    }
-
-    hidden function getBatteryBars() as String {
-        var bat = Math.round(System.getSystemStats().battery / 100.0 * 6).toNumber();
-        return battFull.substring(0, bat);
     }
 
     hidden function getValueByTypeWithUnit(complicationType as Number, width as Number) as String {

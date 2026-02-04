@@ -52,16 +52,13 @@ Pull requests are welcome, but please follow the following guidelines:
 - Weather caching
 - Monthly run/bike distance
 - Font options for bottom fields as well (lines, blended, dots)
-- Compass bearing
-- Larger battery indicator
-
-
 
 ## Change log
 2026-02-03 v1.8.0
 - Improvements when field width is 2
 - New field size option: 3, 2, 3
 - Experimental support for CGM data from CGM Connect Widget
+- Larger battery icon
 
 2025-09-30 v1.7.2
 - Support for Venu 4

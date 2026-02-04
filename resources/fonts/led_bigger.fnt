@@ -1,0 +1,20 @@
+info face="LED" size=40 bold=0 italic=0 smooth=1 spacing=1,1
+common lineHeight=40 base=40 scaleW=260 scaleH=40 pages=1
+page id=0 file="led_bigger.png"
+chars count=11
+
+char id=48 x=0 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=49 x=30 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=50 x=60 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=51 x=90 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=52 x=120 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=53 x=150 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=54 x=180 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=55 x=210 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=56 x=240 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=57 x=270 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=46 x=300 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=45 x=330 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=35 x=360 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=75 x=390 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
+char id=37 x=420 y=0 width=28 height=40 xoffset=0 yoffset=0 xadvance=34 page=0
