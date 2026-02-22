@@ -885,7 +885,7 @@
             <listEntry value="7">WD YY-MM-DD</listEntry>
             <listEntry value="8">WD MM/DD/YY</listEntry>
             <listEntry value="9">WD DD.MM.YY</listEntry>
-            
+            <listEntry value="10">DD MONTH WEEKDAY</listEntry>
             
         </settingConfig>
     </setting>

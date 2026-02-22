@@ -2155,6 +2155,9 @@ class Segment34View extends WatchUi.WatchFace {
             case 9: // WEEKDAY DD.MM.YY
                 value = dayName(today.day_of_week, 2) + " " + today.day.format("%02d") + "." + today.month.format("%02d") + "." + today.year.format("%d").substring(2, 4);
                 break;
+            case 10: // 14 MAR THU
+                value = today.day + " " + monthName(today.month) + " " + dayName(today.day_of_week, 3);
+                break;
         }
 
         return value;
