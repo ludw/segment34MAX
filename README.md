@@ -53,7 +53,13 @@ Pull requests are welcome, but please follow the following guidelines:
 - Monthly run/bike distance
 - Font options for bottom fields as well (lines, blended, dots)
 
+- Move battery icon up a few px
+
 ## Change log
+2026-03-03 v1.8.1
+- Fixed issue with battery indicator showing wrong value on smaller screens
+- 
+
 2026-02-03 v1.8.0
 - Improvements when field width is 2
 - New field size option: 3, 2, 3

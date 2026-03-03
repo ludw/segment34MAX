@@ -1276,8 +1276,8 @@ class Segment34View extends WatchUi.WatchFace {
                 sample = Math.round(System.getSystemStats().battery / 100.0 * 24);
                 max = 24;
             } else {
-                sample = Math.round(System.getSystemStats().battery / 100.0 * 20);
-                max = 20;
+                sample = Math.round(System.getSystemStats().battery / 100.0 * 35);
+                max = 35;
             }
             
             for(var i = 0; i < sample; i++) {
