@@ -56,9 +56,10 @@ Pull requests are welcome, but please follow the following guidelines:
 - Move battery icon up a few px
 
 ## Change log
-2026-03-03 v1.8.1
+2026-03-03 v1.9.0
 - Fixed issue with battery indicator showing wrong value on smaller screens
-- 
+- Additional date format
+- Options for what to show to the left of seconds (default: notification count)
 
 2026-02-03 v1.8.0
 - Improvements when field width is 2

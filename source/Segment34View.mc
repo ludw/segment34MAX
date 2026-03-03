@@ -140,7 +140,7 @@ class Segment34View extends WatchUi.WatchFace {
     hidden var propWeatherLine2Shows as Number = 50;
     hidden var propDateFormat as Number = 0;
     hidden var propShowStressAndBodyBattery as Boolean = true;
-    hidden var propShowNotificationCount as Boolean = true;
+    hidden var propNotificationCountShows as Number = 36;
     hidden var propTzOffset1 as Number = 0;
     hidden var propTzOffset2 as Number = 0;
     hidden var propTzName1 as String = "";
@@ -1084,7 +1084,7 @@ class Segment34View extends WatchUi.WatchFace {
         propLabelVisibility = Application.Properties.getValue("labelVisibility") as Number;
         propDateFormat = Application.Properties.getValue("dateFormat") as Number;
         propShowStressAndBodyBattery = Application.Properties.getValue("showStressAndBodyBattery") as Boolean;
-        propShowNotificationCount = Application.Properties.getValue("showNotificationCount") as Boolean;
+        propNotificationCountShows = Application.Properties.getValue("notificationCountShows") as Number;
         propTzOffset1 = Application.Properties.getValue("tzOffset1") as Number;
         propTzOffset2 = Application.Properties.getValue("tzOffset2") as Number;
         propTzName1 = Application.Properties.getValue("tzName1") as String;
@@ -1121,7 +1121,7 @@ class Segment34View extends WatchUi.WatchFace {
         dataAboveLine1 = getValueByTypeWithUnit(propWeatherLine1Shows, 10);
         dataAboveLine2 = getValueByTypeWithUnit(propWeatherLine2Shows, 10);
         dataBelow = getValueByTypeWithUnit(propDateFieldShows, 10);
-        dataNotifications = getNotificationsData();
+        dataNotifications = getValueByTypeWithUnit(propNotificationCountShows, 2);
         dataBottomLeft = getValueByType(propLeftValueShows, fieldWidths[0]);
         dataBottomMiddle = getValueByType(propMiddleValueShows, fieldWidths[1]);
         dataBottomRight = getValueByType(propRightValueShows, fieldWidths[2]);
@@ -1289,19 +1289,6 @@ class Segment34View extends WatchUi.WatchFace {
             }
         }
         
-        return value;
-    }
-
-    hidden function getNotificationsData() as String {
-        var value = "";
-
-        if(propShowNotificationCount) {
-            var sample = System.getDeviceSettings().notificationCount;
-            if(sample > 0) {
-                value = sample.format("%01d");
-            }
-        }
-
         return value;
     }
 

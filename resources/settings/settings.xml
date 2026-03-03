@@ -364,6 +364,22 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.notificationCountShows" title="Number left of seconds shows:">
+        <settingConfig type="list">
+            <listEntry value="-2">Hidden</listEntry>
+            <listEntry value="36">Notification count</listEntry>
+            <listEntry value="31">Week number</listEntry>
+            <listEntry value="34">Battery percentage</listEntry>
+            <listEntry value="35">Battery days remaining</listEntry>
+            <listEntry value="42">Alarms (count)</listEntry>
+            <listEntry value="70">Weather: UV index</listEntry>
+            <listEntry value="14">Body battery</listEntry>
+            <listEntry value="13">Stress</listEntry>
+            <listEntry value="59">Pulse Ox</listEntry>
+            <listEntry value="4">Floors climbed</listEntry>
+        </settingConfig>
+    </setting>
+
     <setting propertyKey="@Properties.fieldLayout" title="Bottom field layout (number of digits per field)">
         <settingConfig type="list">
             <listEntry value="0">Auto - Default layout depending on screen size</listEntry>
@@ -1017,10 +1033,6 @@
     </setting>
 
     <setting propertyKey="@Properties.showDataBg" title="Show data fields background">
-        <settingConfig type="boolean" />
-    </setting>
-
-    <setting propertyKey="@Properties.showNotificationCount" title="Show Notification Count">
         <settingConfig type="boolean" />
     </setting>
 
