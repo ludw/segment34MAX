@@ -1712,7 +1712,11 @@ class Segment34View extends WatchUi.WatchFace {
         } else if(complicationType == 36) { // Notification count
             var notif_count = System.getDeviceSettings().notificationCount;
             if(notif_count != null) {
-                val = notif_count.format(numberFormat);
+                if(width == 2 and notif_count == 0) {
+                    val = ""; // Hide when shown in the notification field and is zero
+                } else {
+                    val = notif_count.format(numberFormat);
+                }
             }
         } else if(complicationType == 37) { // Solar intensity
             if(System.getSystemStats() has :solarIntensity and System.getSystemStats().solarIntensity != null) {

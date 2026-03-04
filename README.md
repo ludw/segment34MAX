@@ -56,6 +56,9 @@ Pull requests are welcome, but please follow the following guidelines:
 - Move battery icon up a few px
 
 ## Change log
+2026-03-04 v1.9.1
+- Notification count should not be shown when zero
+
 2026-03-03 v1.9.0
 - Fixed issue with battery indicator showing wrong value on smaller screens
 - Additional date format
