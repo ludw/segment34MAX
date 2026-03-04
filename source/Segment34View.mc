@@ -1412,11 +1412,20 @@ class Segment34View extends WatchUi.WatchFace {
     }
 
     hidden function getValueByTypeWithUnit(complicationType as Number, width as Number) as String {
+        var hideIfZero = false;
+        if (complicationType == 136) {
+            complicationType = 36;
+            hideIfZero = true;
+        }
         var unit = getUnitByType(complicationType);
         if (unit.length() > 0) {
             unit = " " + unit;
         }
-        return getValueByType(complicationType, width) + unit;
+        var val = getValueByType(complicationType, width);
+        if (hideIfZero && val.equals("0")) {
+            return "";
+        }
+        return val + unit;
     }
 
     hidden function getUnitByType(complicationType) as String {

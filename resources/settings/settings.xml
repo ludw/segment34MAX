@@ -368,6 +368,7 @@
         <settingConfig type="list">
             <listEntry value="-2">Hidden</listEntry>
             <listEntry value="36">Notification count</listEntry>
+            <listEntry value="136">Notification count if not zero</listEntry>
             <listEntry value="31">Week number</listEntry>
             <listEntry value="34">Battery percentage</listEntry>
             <listEntry value="35">Battery days remaining</listEntry>
