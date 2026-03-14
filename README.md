@@ -56,6 +56,10 @@ Pull requests are welcome, but please follow the following guidelines:
 - Move battery icon up a few px
 
 ## Change log
+2026-03-14 v2.0.0
+- Option to use a different font for the clock with 17 segements
+- Option for not showing the gradient overlay on the clock
+
 2026-03-04 v1.9.1
 - Notification count should not be shown when zero
 
