@@ -89,6 +89,15 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.clockGradientOverlay" title="Clock gradient overlay">
+        <settingConfig type="list">
+            <listEntry value="0">Gradient for both clock and AOD (default)</listEntry>
+            <listEntry value="1">No gradient for clock, gradient in AOD</listEntry>
+            <listEntry value="2">Gradient for clock, no gradient in AOD</listEntry>
+            <listEntry value="3">No gradients</listEntry>
+        </settingConfig>
+    </setting>
+
     <setting propertyKey="@Properties.updateFreq" title="Update frequency for data">
         <settingConfig type="list">
             <listEntry value="60">Every minute</listEntry>
