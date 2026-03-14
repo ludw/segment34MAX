@@ -82,6 +82,13 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.clockFont" title="Clock font">
+        <settingConfig type="list">
+            <listEntry value="0">34 Segments, default</listEntry>
+            <listEntry value="1">17 Segments, blockier more readable</listEntry>
+        </settingConfig>
+    </setting>
+
     <setting propertyKey="@Properties.updateFreq" title="Update frequency for data">
         <settingConfig type="list">
             <listEntry value="60">Every minute</listEntry>
